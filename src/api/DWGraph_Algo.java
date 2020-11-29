@@ -1,5 +1,11 @@
 package api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class DWGraph_Algo implements dw_graph_algorithms {
@@ -88,7 +94,19 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     @Override
     public boolean save(String file) {
-        return false;
+        Gson gson = new Gson();
+        String json = gson.toJson(this.graph);
+        System.out.println(json);
+
+        try{
+            PrintWriter pw = new PrintWriter(new File(file));
+            pw.write(json);
+            pw.close();
+            return true;
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
