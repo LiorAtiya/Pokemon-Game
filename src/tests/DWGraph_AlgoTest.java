@@ -81,4 +81,19 @@ class DWGraph_AlgoTest {
         expected.add(dwg.getNode(3));
         assertEquals(expected, actual);
     }
+
+    @Test
+    void save_load(){
+        directed_weighted_graph dwg = DWGraph_DSTest.graph_creator(4,0);
+        dwg.connect(0,1,1);
+        dwg.connect(1,2,1);
+        dwg.connect(2,3,1);
+        dwg.connect(0,2,5);
+
+        dw_graph_algorithms wga = new DWGraph_Algo();
+        wga.init(dwg);
+        wga.save("Graph.json");
+
+        //test
+    }
 }
