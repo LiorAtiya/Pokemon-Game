@@ -42,7 +42,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
             BFS(graph.getNode(i.getKey()));
 
             for(node_data x : graph.getV()){
-                if(x.getTag() == -1) return false;
+                if(x.getTag() == 0) return false;
             }
         }
         return true;
@@ -50,12 +50,40 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     @Override
     public double shortestPathDist(int src, int dest) {
-        return 0;
+        //If it does not exist src or dest.
+        if (graph.getNode(dest) == null || graph.getNode(src) == null) return -1;
+        Dijkstra(this.graph, graph.getNode(src));
+        //If there is no path to the dest.
+        if (graph.getNode(dest).getTag() == Integer.MAX_VALUE) return -1;
+
+        ////*In the attribute of the node - "Tag", save the distance between the src and the dest.
+        return graph.getNode(dest).getTag();
     }
 
     @Override
     public List<node_data> shortestPath(int src, int dest) {
-        return null;
+        //Scan the entire graph and return the number of edges of the shortest path
+        double sizePath = shortestPathDist(src, dest);
+        if (sizePath == -1) return null;
+
+        //Contain all nodes of the path
+        List<node_data> path = new ArrayList<>();
+
+        if (src == dest) path.add(graph.getNode(dest));
+        else {
+            path.add(graph.getNode(dest));
+            node_data d = this.graph.getNode(dest);
+            //*In the attribute of the node - "Info", save the key of the parent node in the shortest path
+            node_data parent = this.graph.getNode(Integer.parseInt(d.getInfo()));
+
+            //Loop from dest to src
+            while (parent.getInfo() != null) {
+                path.add(0, parent);
+                parent = this.graph.getNode(Integer.parseInt(parent.getInfo()));
+            }
+            path.add(0, graph.getNode(src));
+        }
+        return path;
     }
 
     @Override
@@ -68,7 +96,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return false;
     }
 
-    private static void Dijkstra(directed_weighted_graph g, node_data src) {
+    private void Dijkstra(directed_weighted_graph g, node_data src) {
         HashMap<Integer, Boolean> visited = new HashMap<>();
 
         Comparator<node_data> nameSorter = Comparator.comparing(node_data::getTag);
@@ -91,10 +119,11 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 if (!visited.get(curr.getKey())) {
                     if(g.getEdge(curr.getKey(), v.getDest()) != null) {
                         double t = curr.getTag() + g.getEdge(curr.getKey(), v.getDest()).getWeight();
-                        if (v.getTag() > t) {
-                            v.setTag((int)t);
-                            v.setInfo("" + curr.getKey());
-                            pQueue.add(g.getNode(v.getDest()));
+                        node_data nei = g.getNode(v.getDest());
+                        if (nei.getTag() > t) {
+                            nei.setTag((int)t);
+                            nei.setInfo("" + curr.getKey());
+                            pQueue.add(nei);
                         }
                     }
                 }
@@ -106,9 +135,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     public void BFS(node_data n){
         //Reset distances.
         for(node_data x : graph.getV()){
-            x.setTag(-1);
+            x.setTag(0);
         }
-        n.setTag(0);
+        n.setTag(1);
         //Contain the neighbors of the current node.
         Queue<node_data> q = new LinkedList<>();
         q.add(n);
@@ -118,10 +147,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
             for(edge_data v : graph.getE(current.getKey())){
                 //If you have not yet passed the node.
-                if(v.getTag() == -1){
-                    node_data temp = graph.getNode(v.getDest());
+                node_data temp = graph.getNode(v.getDest());
+                if(temp.getTag() == 0){
                     //Marking the distance from the src
-                    temp.setTag(current.getTag()+1);
+                    temp.setTag(1);
                     q.add(temp);
                 }
             }
