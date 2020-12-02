@@ -1,12 +1,12 @@
 package api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class DWGraph_Algo implements dw_graph_algorithms {
 
@@ -29,7 +29,12 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
         //Go over the collection of all nodes and copy the attributes of the node
         for (node_data i : this.graph.getV()) {
-            copy.addNode(i);
+            node_data n = new NodeData(i.getKey());
+            n.setTag(i.getTag());
+            n.setWeight(i.getWeight());
+            n.setInfo(i.getInfo());
+            n.setLocation(i.getLocation());
+            copy.addNode(n);
 
             //Copy of the neighbors
             for (edge_data v : this.graph.getE(i.getKey())) {
@@ -94,8 +99,19 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     @Override
     public boolean save(String file) {
-        Gson gson = new Gson();
-        String json = gson.toJson(this.graph);
+        String json = "{\"Edges\":[";
+        for(node_data x : this.graph.getV()){
+            for(edge_data y : this.graph.getE(x.getKey())){
+                json += y.toString()+",";
+            }
+        }
+        json = json.substring(0,json.length()-1)+"],\"Nodes\":[";
+
+        for(node_data x : this.graph.getV()){
+            json += x.toString()+",";
+        }
+        json = json.substring(0,json.length()-1)+"]}";
+
         System.out.println(json);
 
         try{
@@ -111,8 +127,45 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
     @Override
     public boolean load(String file) {
+        GsonBuilder builder = new GsonBuilder();
+        JsonDeserializer<DWGraph_DS> graphObject = new JsonDeserializer<DWGraph_DS>(){
+            @Override
+            public DWGraph_DS deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                JsonObject jsonObject = json.getAsJsonObject();
+                JsonArray nodes = jsonObject.get("Nodes").getAsJsonArray();
+                DWGraph_DS graph = new DWGraph_DS();
+
+                for(JsonElement n : nodes){
+                    int key = n.getAsJsonObject().get("id").getAsInt();
+                    node_data newNode = new NodeData(key);
+                    graph.addNode(newNode);
+                }
+
+                JsonArray edges = jsonObject.get("Edges").getAsJsonArray();
+                for(JsonElement e : edges){
+                    int src = e.getAsJsonObject().get("src").getAsInt();
+                    int dest = e.getAsJsonObject().get("dest").getAsInt();
+                    int weight = e.getAsJsonObject().get("w").getAsInt();
+                    graph.connect(src,dest,weight);
+                }
+                return graph;
+            }
+        };
+
+        builder.registerTypeAdapter(DWGraph_DS.class, graphObject);
+        Gson customGson = builder.create();
+
+        try{
+            FileReader reader = new FileReader(file);
+            DWGraph_DS graph = customGson.fromJson(reader,DWGraph_DS.class);
+            this.graph = graph;
+            return true;
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
         return false;
     }
+
 
     private void Dijkstra(directed_weighted_graph g, node_data src) {
         HashMap<Integer, Boolean> visited = new HashMap<>();
