@@ -1,6 +1,9 @@
 package api;
 
- public class NodeData implements node_data {
+import gameClient.util.Point3D;
+
+public class NodeData implements node_data {
+
     /**
      * ID of node
      */
@@ -15,6 +18,7 @@ package api;
 
     public NodeData(int key){
         this.key = key;
+        this.location = new Point3D(0,0,0);
     }
 
     /**
@@ -72,6 +76,11 @@ package api;
     @Override
     public void setTag(int t) {
         this.tag = t;
+    }
+
+    public String toString(){
+        return "{\"pos\":\""+this.getLocation().x()+","+this.getLocation().y()+","+this.getLocation().z()
+                +"\",\"id\":"+this.key+"}";
     }
 
 }

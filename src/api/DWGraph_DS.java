@@ -56,6 +56,10 @@ public class DWGraph_DS implements directed_weighted_graph {
         public void setTag(int t) {
             this.tag = t;
         }
+
+        public String toString(){
+            return "{\"src\":"+this.src+",\"w\":"+this.weight+",\"dest\":"+this.des+"}";
+        }
     }
 
 
@@ -78,7 +82,7 @@ public class DWGraph_DS implements directed_weighted_graph {
         //If it already exists or n is null
         if (n == null || this.vertices.containsKey(n.getKey())) return;
 
-        this.vertices.put(n.getKey(), new NodeData(n));
+        this.vertices.put(n.getKey(), n);
         this.neighbors.put(n.getKey(), new HashMap<>());
         this.countMC++;
     }
@@ -128,6 +132,7 @@ public class DWGraph_DS implements directed_weighted_graph {
 
     @Override
     public Collection<edge_data> getE(int node_id) {
+        //FIX****
         Collection<edge_data> neiOfNode = new ArrayList<>();
         for(Integer x : this.neighbors.get(node_id).keySet()) {
             neiOfNode.add(getEdge(node_id,x));
@@ -137,7 +142,7 @@ public class DWGraph_DS implements directed_weighted_graph {
 
     @Override
     public node_data removeNode(int key) {
-        node_data x;
+//        node_data x;
         //If it does not exist
         if (getNode(key) == null) return null;
         else {
@@ -149,16 +154,17 @@ public class DWGraph_DS implements directed_weighted_graph {
                     removeEdge(j.getKey(),key);
                 }
             }
-            this.neighbors.remove(key);
-            x = this.vertices.remove(key);
+//            this.neighbors.remove(key);
+//            x = this.vertices.remove(key);
             this.countMC++;
         }
-        return x;
+        return this.vertices.remove(key);
     }
 
     @Override
     public edge_data removeEdge(int src, int dest) {
-        if(this.neighbors.get(src).remove(dest) == null) return null;
+        if(this.neighbors.get(src) == null || this.neighbors.get(src).get(dest) == null) return null;
+//        if(this.neighbors.get(src).get(dest) == null) return null;
         this.edgeSize--;
         return this.neighbors.get(src).remove(dest);
     }

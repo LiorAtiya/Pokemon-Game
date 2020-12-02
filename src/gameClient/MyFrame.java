@@ -40,11 +40,12 @@ public class MyFrame extends JFrame{
 		directed_weighted_graph g = _ar.getGraph();
 		_w2f = Arena.w2f(g,frame);
 	}
+
 	public void paint(Graphics g) {
 		int w = this.getWidth();
 		int h = this.getHeight();
 		g.clearRect(0, 0, w, h);
-	//	updateFrame();
+		updateFrame();
 		drawPokemons(g);
 		drawGraph(g);
 		drawAgants(g);
@@ -90,7 +91,7 @@ public class MyFrame extends JFrame{
 
 				geo_location fp = this._w2f.world2frame(c);
 				g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
-			//	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
+//				g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
 				
 			}
 		}
@@ -98,7 +99,7 @@ public class MyFrame extends JFrame{
 	}
 	private void drawAgants(Graphics g) {
 		List<CL_Agent> rs = _ar.getAgents();
-	//	Iterator<OOP_Point3D> itr = rs.iterator();
+//		Iterator<OOP_Point3D> itr = rs.iterator();
 		g.setColor(Color.red);
 		int i=0;
 		while(rs!=null && i<rs.size()) {
@@ -106,7 +107,6 @@ public class MyFrame extends JFrame{
 			int r=8;
 			i++;
 			if(c!=null) {
-
 				geo_location fp = this._w2f.world2frame(c);
 				g.fillOval((int)fp.x()-r, (int)fp.y()-r, 2*r, 2*r);
 			}

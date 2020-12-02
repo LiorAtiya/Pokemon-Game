@@ -93,7 +93,9 @@ class DWGraph_AlgoTest {
         dw_graph_algorithms wga = new DWGraph_Algo();
         wga.init(dwg);
         wga.save("Graph.json");
-
-        //test
+        wga.load("Graph.json");
+        wga.save("Graph.json");
+//        System.out.println(wga.getGraph().nodeSize());
+//        System.out.println(wga.getGraph().edgeSize());
     }
 }
