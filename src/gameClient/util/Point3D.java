@@ -26,7 +26,9 @@ public class Point3D implements geo_location, Serializable{
     public Point3D(Point3D p) {
        this(p.x(), p.y(), p.z());
     }
+
     public Point3D(double x, double y) {this(x,y,0);}
+
     public Point3D(String s) { try {
             String[] a = s.split(",");
             _x = Double.parseDouble(a[0]);
@@ -47,6 +49,7 @@ public class Point3D implements geo_location, Serializable{
 
 
     public String toString() { return _x+","+_y+","+_z; }
+
     @Override
     public double distance(geo_location p2) {
         double dx = this.x() - p2.x();
@@ -63,6 +66,7 @@ public class Point3D implements geo_location, Serializable{
     }
     public boolean close2equals(geo_location p2) {
         return ( this.distance(p2) < EPS ); }
+
     public boolean equalsXY (Point3D p)
     {return p._x == _x && p._y == _y;}
 

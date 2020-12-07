@@ -85,17 +85,15 @@ class DWGraph_AlgoTest {
     @Test
     void save_load(){
         directed_weighted_graph dwg = DWGraph_DSTest.graph_creator(4,0);
-        dwg.connect(0,1,1);
-        dwg.connect(1,2,1);
-        dwg.connect(2,3,1);
-        dwg.connect(0,2,5);
-
         dw_graph_algorithms wga = new DWGraph_Algo();
-        wga.init(dwg);
-        wga.save("Graph.json");
-        wga.load("Graph.json");
-        wga.save("Graph.json");
-//        System.out.println(wga.getGraph().nodeSize());
-//        System.out.println(wga.getGraph().edgeSize());
+
+        wga.load("data/A3");
+        for(node_data n : wga.getGraph().getV()){
+            for(node_data n1 : wga.getGraph().getV()){
+                System.out.println("path between "+n.getKey()+" to "+n1.getKey()+":"+wga.shortestPathDist(n.getKey(),n1.getKey()));
+            }
+        }
+        double res = wga.shortestPathDist(22,27);
+        System.out.println("path between 22 to 27: "+res);
     }
 }

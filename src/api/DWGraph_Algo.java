@@ -1,12 +1,11 @@
 package api;
 
 import com.google.gson.*;
+import gameClient.util.Point3D;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.*;
-import java.util.Map.Entry;
 
 public class DWGraph_Algo implements dw_graph_algorithms {
 
@@ -65,10 +64,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         if (graph.getNode(dest) == null || graph.getNode(src) == null) return -1;
         Dijkstra(this.graph, graph.getNode(src));
         //If there is no path to the dest.
-        if (graph.getNode(dest).getTag() == Integer.MAX_VALUE) return -1;
+        if (graph.getNode(dest).getWeight() == Double.MAX_VALUE) return -1;
 
-        ////*In the attribute of the node - "Tag", save the distance between the src and the dest.
-        return graph.getNode(dest).getTag();
+        ////*In the attribute of the node - "Weight", save the distance between the src and the dest.
+        return graph.getNode(dest).getWeight();
     }
 
     @Override
@@ -137,7 +136,16 @@ public class DWGraph_Algo implements dw_graph_algorithms {
 
                 for(JsonElement n : nodes){
                     int key = n.getAsJsonObject().get("id").getAsInt();
+
+                    String location = n.getAsJsonObject().get("pos").getAsString();
+                    String[] parts = location.split(",");
+                    double x = Double.parseDouble(parts[0]);
+                    double y = Double.parseDouble(parts[1]);
+                    double z = Double.parseDouble(parts[2]);
+                    Point3D p = new Point3D(x,y,z);
+
                     node_data newNode = new NodeData(key);
+                    newNode.setLocation(p);
                     graph.addNode(newNode);
                 }
 
@@ -145,17 +153,17 @@ public class DWGraph_Algo implements dw_graph_algorithms {
                 for(JsonElement e : edges){
                     int src = e.getAsJsonObject().get("src").getAsInt();
                     int dest = e.getAsJsonObject().get("dest").getAsInt();
-                    int weight = e.getAsJsonObject().get("w").getAsInt();
+                    double weight = e.getAsJsonObject().get("w").getAsDouble();
                     graph.connect(src,dest,weight);
                 }
                 return graph;
             }
         };
 
-        builder.registerTypeAdapter(DWGraph_DS.class, graphObject);
-        Gson customGson = builder.create();
-
         try{
+            builder.registerTypeAdapter(DWGraph_DS.class, graphObject);
+            Gson customGson = builder.create();
+
             FileReader reader = new FileReader(file);
             DWGraph_DS graph = customGson.fromJson(reader,DWGraph_DS.class);
             this.graph = graph;
@@ -170,13 +178,13 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     private void Dijkstra(directed_weighted_graph g, node_data src) {
         HashMap<Integer, Boolean> visited = new HashMap<>();
 
-        Comparator<node_data> nameSorter = Comparator.comparing(node_data::getTag);
+        Comparator<node_data> nameSorter = Comparator.comparing(node_data::getWeight);
         PriorityQueue<node_data> pQueue = new PriorityQueue<>(nameSorter);
         for (node_data x : g.getV()) {
             if (x != src) {
-                x.setTag(Integer.MAX_VALUE);
+                x.setWeight(Double.MAX_VALUE);
             } else {
-                x.setTag(0);
+                x.setWeight(0);
             }
             x.setInfo(null);
             pQueue.add(x);
@@ -189,10 +197,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
             for (edge_data v : g.getE(curr.getKey())) {
                 if (!visited.get(curr.getKey())) {
                     if(g.getEdge(curr.getKey(), v.getDest()) != null) {
-                        double t = curr.getTag() + g.getEdge(curr.getKey(), v.getDest()).getWeight();
+                        double t = curr.getWeight() + g.getEdge(curr.getKey(), v.getDest()).getWeight();
                         node_data nei = g.getNode(v.getDest());
-                        if (nei.getTag() > t) {
-                            nei.setTag((int)t);
+                        if (nei.getWeight() > t) {
+                            nei.setWeight(t);
                             nei.setInfo("" + curr.getKey());
                             pQueue.add(nei);
                         }

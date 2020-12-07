@@ -19,6 +19,7 @@ public class NodeData implements node_data {
     public NodeData(int key){
         this.key = key;
         this.location = new Point3D(0,0,0);
+        this.weight = 0;
     }
 
     /**
