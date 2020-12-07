@@ -7,10 +7,15 @@ import api.node_data;
 import gameClient.util.Point3D;
 import gameClient.util.Range2Range;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class MyPanel extends JPanel {
 
@@ -21,6 +26,29 @@ public class MyPanel extends JPanel {
         this._ar = ar;
         this._w2f = w2f;
         this.setBackground(Color.green);
+    }
+
+    public BufferedImage importImage(){
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(new File("pictures/agent.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return image;
+    }
+
+    public BufferedImage importImagePokemon(){
+        BufferedImage image = null;
+        Random rnd = new Random();
+        int r = rnd.nextInt(13)+1;
+        try {
+            image = ImageIO.read(new File("pictures/"+r+".png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return image;
     }
 
     @Override
@@ -72,7 +100,8 @@ public class MyPanel extends JPanel {
                 if (c != null) {
 
                     geo_location fp = this._w2f.world2frame(c);
-                    g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
+//                    g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
+                    g.drawImage(importImagePokemon(),(int) fp.x() - r,(int) fp.y() - r,3 * r,3 * r,this);
                     //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
 
                 }
@@ -82,7 +111,6 @@ public class MyPanel extends JPanel {
 
     private void drawAgants(Graphics g) {
         List<CL_Agent> rs = _ar.getAgents();
-        //	Iterator<OOP_Point3D> itr = rs.iterator();
         g.setColor(Color.red);
         int i = 0;
         while (rs != null && i < rs.size()) {
@@ -90,9 +118,9 @@ public class MyPanel extends JPanel {
             int r = 8;
             i++;
             if (c != null) {
-
                 geo_location fp = this._w2f.world2frame(c);
-                g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
+//                g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
+                g.drawImage(importImage(),(int) fp.x() - r,(int) fp.y() - r,4 * r,4 * r,this);
             }
         }
     }

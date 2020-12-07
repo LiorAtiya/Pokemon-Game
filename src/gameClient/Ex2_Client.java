@@ -85,6 +85,12 @@ public class Ex2_Client implements Runnable{
 		return ans;
 	}
 
+//	public static int strategy3(directed_weighted_graph g, int src){
+//		int ans = -1;
+//		List<CL_Pokemon> listPokemom = _ar.getPokemons();
+//
+//	}
+
 	public static int strategy2(directed_weighted_graph g, int src){
 		int ans = -1;
 		List<CL_Pokemon> listPokemom = _ar.getPokemons();
@@ -104,15 +110,7 @@ public class Ex2_Client implements Runnable{
 		}
 
 		int startEdge = better.get_edge().getSrc();
-		List<node_data> listNodes = new ArrayList<>();
-		listNodes.add(g.getNode(better.get_edge().getSrc()));
-
-		//NEED TO CHECK WHY ITS NULL
-		if(wga.shortestPath(src,startEdge) != null){
-			listNodes = wga.shortestPath(src,startEdge);
-		}
-
-//		System.out.println("Shortest path: "+listN);
+		List<node_data> listNodes = wga.shortestPath(src,startEdge);
 		listNodes.add(g.getNode(better.get_edge().getDest()));
 
 
@@ -138,25 +136,20 @@ public class Ex2_Client implements Runnable{
 		}
 
 		for(int i=0 ; i < listPokemom.size() ; i++){
-			if((listPokemom.get(i).getValue() >= better.getValue()) ||
-					(wga.shortestPathDist(src,listPokemom.get(i).get_edge().getSrc())
-							<= wga.shortestPathDist(src,better.get_edge().getSrc()))){
+			if((listPokemom.get(i).getValue() > better.getValue())){
 				better = listPokemom.get(i);
 			}
 		}
 		int startEdge = better.get_edge().getSrc();
-		List<node_data> listNodes = new ArrayList<>();
+		List<node_data> listNodes = wga.shortestPath(src,startEdge);
 		listNodes.add(g.getNode(better.get_edge().getDest()));
 
-		//NEED TO CHECK WHY ITS NULL
-		if(wga.shortestPath(src,startEdge) != null){
-			listNodes = wga.shortestPath(src,startEdge);
+
+		if(listNodes.size() > 1){
+			ans = listNodes.get(1).getKey();
+		}else{
+			ans = listNodes.get(0).getKey();
 		}
-
-//		System.out.println("Shortest path: "+listN);
-		listNodes.add(g.getNode(better.get_edge().getDest()));
-
-		ans = listNodes.get(1).getKey();
 		return ans;
 	}
 

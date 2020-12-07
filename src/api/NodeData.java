@@ -79,6 +79,7 @@ public class NodeData implements node_data {
         this.tag = t;
     }
 
+
     public String toString(){
         return "{\"pos\":\""+this.getLocation().x()+","+this.getLocation().y()+","+this.getLocation().z()
                 +"\",\"id\":"+this.key+"}";

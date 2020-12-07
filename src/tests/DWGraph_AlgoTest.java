@@ -87,13 +87,16 @@ class DWGraph_AlgoTest {
         directed_weighted_graph dwg = DWGraph_DSTest.graph_creator(4,0);
         dw_graph_algorithms wga = new DWGraph_Algo();
 
-        wga.load("data/A3");
-        for(node_data n : wga.getGraph().getV()){
-            for(node_data n1 : wga.getGraph().getV()){
-                System.out.println("path between "+n.getKey()+" to "+n1.getKey()+":"+wga.shortestPathDist(n.getKey(),n1.getKey()));
-            }
-        }
-        double res = wga.shortestPathDist(22,27);
-        System.out.println("path between 22 to 27: "+res);
+        wga.load("data/A1");
+//        wga.save("copy");
+//        for(node_data n : wga.getGraph().getV()){
+//            for(node_data n1 : wga.getGraph().getV()){
+//                System.out.println("path between "+n.getKey()+" to "+n1.getKey()+":"+wga.shortestPathDist(n.getKey(),n1.getKey()));
+//            }
+//        }
+
+        System.out.println("wga.isConnected(): "+wga.isConnected());
+        double res = wga.shortestPathDist(2,9);
+        System.out.println("path between 2 to 9: "+res);
     }
 }
