@@ -5,6 +5,8 @@ import api.edge_data;
 import api.geo_location;
 import api.node_data;
 import gameClient.util.Point3D;
+import gameClient.util.Range;
+import gameClient.util.Range2D;
 import gameClient.util.Range2Range;
 
 import javax.imageio.ImageIO;
@@ -58,6 +60,18 @@ public class MyPanel extends JPanel {
         drawGraph(g);
         drawAgants(g);
         drawInfo(g);
+        updateFrame();
+    }
+
+    private void timer(){
+    }
+
+    private void updateFrame() {
+        Range rx = new Range(20,this.getWidth()-20);
+        Range ry = new Range(this.getHeight()-10,150);
+        Range2D frame = new Range2D(rx,ry);
+        directed_weighted_graph g = _ar.getGraph();
+        _w2f = Arena.w2f(g,frame);
     }
 
     private void drawInfo(Graphics g) {

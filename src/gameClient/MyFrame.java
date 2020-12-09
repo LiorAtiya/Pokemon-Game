@@ -5,6 +5,7 @@ import gameClient.util.Range;
 import gameClient.util.Range2D;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class represents a very simple GUI class to present a
@@ -16,6 +17,12 @@ import javax.swing.*;
 public class MyFrame extends JFrame {
 	private Arena _ar;
 	private gameClient.util.Range2Range _w2f;
+
+	MyFrame(){
+		initFrame();
+
+	}
+
 
 	MyFrame(String a,Arena ar) {
 		super(a);
@@ -32,7 +39,15 @@ public class MyFrame extends JFrame {
 
 	private void initFrame() {
 		this.setSize(1000, 600);
+		centreWindow(this);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	private static void centreWindow(Window frame) {
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+		frame.setLocation(x, y);
 	}
 
 	private void updateFrame() {
