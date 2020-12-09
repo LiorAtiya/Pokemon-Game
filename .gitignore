@@ -1,3 +1,5 @@
 Directed_Weighted_Graph.iml
 .idea
 out/
+!src/gameClient/GFrame.java
+!src/gameClient/Ex2.java
