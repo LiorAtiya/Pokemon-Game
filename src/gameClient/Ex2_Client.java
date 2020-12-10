@@ -16,29 +16,39 @@ public class Ex2_Client implements Runnable {
     private static MyFrame _win;
     private static Arena _ar;
     private static int scenario_num = -1;
-    private static JFrame f;
 
-    public static void main(String[] a) throws InterruptedException {
+    public static void main(String[] args) {
         menu();
         Thread client = new Thread(new Ex2_Client());
         client.start();
     }
 
-    public static boolean menu() {
-        f = new JFrame("Button Example");
+    public static void menu() {
+        JFrame f = new JFrame("Login to game");
         JButton b = new JButton("Start");
         b.setBounds(75, 170, 140, 40);
         JLabel label = new JLabel();
-        label.setText("Choose level :");
-        label.setBounds(10, 10, 100, 100);
+        label.setText("ID :");
+        label.setBounds(80, 13, 100, 100);
         JLabel label1 = new JLabel();
         label1.setBounds(10, 110, 200, 100);
         JTextField textfield = new JTextField();
         textfield.setBounds(110, 50, 130, 30);
 
+        JLabel label2 = new JLabel();
+        label2.setText("Choose level :");
+        label2.setBounds(20, 63, 100, 100);
+        JLabel label3 = new JLabel();
+        label3.setBounds(10, 140, 200, 100);
+        JTextField textfield2 = new JTextField();
+        textfield2.setBounds(110, 100, 130, 30);
+
+        f.add(label);
         f.add(label1);
         f.add(textfield);
-        f.add(label);
+        f.add(label2);
+        f.add(label3);
+        f.add(textfield2);
         f.add(b);
         f.setSize(300, 300);
         f.setLayout(null);
@@ -52,17 +62,13 @@ public class Ex2_Client implements Runnable {
         while (scenario_num == -1) {
             b.addActionListener(new ActionListener() {
                 @Override
-                public synchronized void actionPerformed(ActionEvent arg0) {
-                    String text = textfield.getText();
+                public void actionPerformed(ActionEvent arg0) {
+                    String text = textfield2.getText();
                     scenario_num = Integer.parseInt(text);
-                    if(scenario_num != -1) {
-                        return;
-                    }
                 }
             });
         }
         f.dispose();
-        return true;
     }
 
     @Override
@@ -132,6 +138,7 @@ public class Ex2_Client implements Runnable {
     private static void moveAgants(game_service game, directed_weighted_graph gg) {
         long t = game.timeToEnd();
         int seconds = (int) ((t / 1000) % 60);
+        _ar.setTimeToEnd(seconds);
 
         String lg = game.move();
         List<CL_Agent> log = Arena.getAgents(lg, gg);

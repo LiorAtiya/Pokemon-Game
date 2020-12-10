@@ -27,6 +27,7 @@ public class Arena {
 	private List<CL_Agent> _agents;
 	private List<CL_Pokemon> _pokemons;
 	private List<String> _info;
+	private long timer;
 	private static Point3D MIN = new Point3D(0, 100,0);
 	private static Point3D MAX = new Point3D(0, 100,0);
 
@@ -44,6 +45,16 @@ public class Arena {
 	public void setAgents(List<CL_Agent> f) {
 		this._agents = f;
 	}
+
+	public void setTimeToEnd(long time){
+//		this.timer = (int) ((time / 1000) % 60);
+		this.timer = time;
+	}
+
+	public long getTimeToEnd(){
+		return this.timer;
+	}
+
 	public void setGraph(directed_weighted_graph g) {this._gg =g;}//init();}
 
 	private void init( ) {
