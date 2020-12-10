@@ -78,7 +78,7 @@ public class MyPanel extends JPanel {
         g.setFont(font);
         g.setColor(Color.red);
         g.drawString("Time to end: "+_ar.getTimeToEnd()+" seconds  | ",250,200);
-        g.drawString("Level:       |   ",450,200);
+        g.drawString("Level:       |  ",450,200);
         g.drawString("Score: ",550,200);
     }
 
