@@ -112,6 +112,7 @@ public class Arena {
 		catch (JSONException e) {e.printStackTrace();}
 		return ans;
 	}
+
 	public static void updateEdge(CL_Pokemon fr, directed_weighted_graph g) {
 		//	oop_edge_data ans = null;
 		Iterator<node_data> itr = g.getV().iterator();

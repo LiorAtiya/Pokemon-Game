@@ -19,6 +19,10 @@ public class Ex2_Client implements Runnable {
     private static JFrame f;
 
     public static void main(String[] a) throws InterruptedException {
+
+//        game_service game = Game_Server_Ex2.getServer(1);
+//        System.out.println(game);
+//        System.out.println(game.getPokemons());
         menu();
         Thread client = new Thread(new Ex2_Client());
         client.start();
@@ -105,7 +109,7 @@ public class Ex2_Client implements Runnable {
 
             while (game.isRunning()) {
                 _win.repaint();
-                moveAgants(game, gg);
+                moveAgents(game, gg);
                 try {
 //				if(ind%1 == 0) {_win.repaint();}
                     Thread.sleep(dt);
@@ -129,31 +133,62 @@ public class Ex2_Client implements Runnable {
      * @param gg
      * @param
      */
-    private static void moveAgants(game_service game, directed_weighted_graph gg) {
+    private static void moveAgents(game_service game, directed_weighted_graph gg) {
         long t = game.timeToEnd();
         int seconds = (int) ((t / 1000) % 60);
 
-        String lg = game.move();
-        List<CL_Agent> log = Arena.getAgents(lg, gg);
-        _ar.setAgents(log);
-
-        String fs = game.getPokemons();
-        List<CL_Pokemon> ffs = Arena.json2Pokemons(fs);
-        _ar.setPokemons(ffs);
-        for (int i = 0; i < log.size(); i++) {
-            CL_Agent ag = log.get(i);
-            int id = ag.getID();
-            int dest = ag.getNextNode();
-            int src = ag.getSrcNode();
-            double v = ag.getValue();
-            if (dest == -1) {
-                dest = nextNode(gg, src);
-                game.chooseNextEdge(ag.getID(), dest);
-                System.out.println("Agent: " + id + ", val: " + v + " - turned to node: " + dest);
-                System.out.println("Time left: " + seconds + " seconds");
+        if (_ar.getAgents()==null) {
+            String lg = game.move();
+            List<CL_Agent> log = Arena.getAgents(lg, gg);
+            _ar.setAgents(log);
+        }
+            List<CL_Agent> log2 = _ar.getAgents();
+            for (int i = 0; i < log2.size(); i++) {
+                if (log2.get(i).getNextNode() == -1) {
+                    String lg = game.move();
+                    String fs = game.getPokemons();
+                    List<CL_Pokemon> ffs = Arena.json2Pokemons(fs);
+                    _ar.setPokemons(ffs);
+                    CL_Agent ag = log2.get(i);
+                    int id = ag.getID();
+                    int dest = ag.getNextNode();
+                    int src = ag.getSrcNode();
+                    double v = ag.getValue();
+                    dest = nextNode(gg, src);
+                    game.chooseNextEdge(ag.getID(), dest);
+                    System.out.println("Agent: " + id + ", val: " + v + " - turned to node: " + dest);
+                    System.out.println("Time left: " + seconds + " seconds");
+                }
             }
         }
-    }
+
+
+
+//    private static void moveAgents(game_service game, directed_weighted_graph gg) {
+//        long t = game.timeToEnd();
+//        int seconds = (int) ((t / 1000) % 60);
+//
+//        String lg = game.move();
+//        List<CL_Agent> log = Arena.getAgents(lg, gg);
+//        _ar.setAgents(log);
+//
+//        String fs = game.getPokemons();
+//        List<CL_Pokemon> ffs = Arena.json2Pokemons(fs);
+//        _ar.setPokemons(ffs);
+//        for (int i = 0; i < log.size(); i++) {
+//            CL_Agent ag = log.get(i);
+//            int id = ag.getID();
+//            int dest = ag.getNextNode();
+//            int src = ag.getSrcNode();
+//            double v = ag.getValue();
+//            if (dest == -1) {
+//                dest = nextNode(gg, src);
+//                game.chooseNextEdge(ag.getID(), dest);
+//                System.out.println("Agent: " + id + ", val: " + v + " - turned to node: " + dest);
+//                System.out.println("Time left: " + seconds + " seconds");
+//            }
+//        }
+//    }
 
     /**
      * a very simple random walk implementation!
@@ -166,6 +201,46 @@ public class Ex2_Client implements Runnable {
         int ans = strategy2(g, src);
         return ans;
     }
+
+
+//me
+    public static int strategy3(directed_weighted_graph g, int src){
+        int ans = -1;
+        List<CL_Pokemon> listPokemon = _ar.getPokemons();
+        CL_Pokemon better = listPokemon.get(0);
+        for(int i=0; i<listPokemon.size(); i++){
+            if(listPokemon.get(i).getValue()>better.getValue()){
+                better = listPokemon.get(i);
+            }
+        }
+        for (int i = 0; i < listPokemon.size(); i++) {
+            Arena.updateEdge(listPokemon.get(i), g);
+        }
+
+        dw_graph_algorithms wga = new DWGraph_Algo();
+        wga.init(g);
+
+        for (int i = 0; i < listPokemon.size(); i++) {
+            if (wga.shortestPathDist(src, listPokemon.get(i).get_edge().getSrc())
+                    <= wga.shortestPathDist(src, better.get_edge().getSrc())) {
+                better = listPokemon.get(i);
+            }
+        }
+
+        int startEdge = better.get_edge().getSrc();
+        List<node_data> listNodes = wga.shortestPath(src, startEdge);
+        listNodes.add(g.getNode(better.get_edge().getDest()));
+
+
+        if (listNodes.size() > 1) {
+            ans = listNodes.get(1).getKey();
+        } else {
+            ans = listNodes.get(0).getKey();
+        }
+        return ans;
+    }
+
+
 
     public static int strategy2(directed_weighted_graph g, int src) {
         int ans = -1;
