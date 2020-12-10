@@ -1,6 +1,7 @@
 package gameClient;
 
 import api.directed_weighted_graph;
+import api.game_service;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
 
@@ -17,16 +18,12 @@ import java.awt.*;
 public class MyFrame extends JFrame {
 	private Arena _ar;
 	private gameClient.util.Range2Range _w2f;
-
-	MyFrame(){
-		initFrame();
-
-	}
-
+	private game_service game;
 
 	MyFrame(String a,Arena ar) {
 		super(a);
 		this._ar = ar;
+		this.game = game;
 		initFrame();
 		updateFrame();
 		initPanel();

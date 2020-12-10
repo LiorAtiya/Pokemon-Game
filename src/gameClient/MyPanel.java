@@ -1,9 +1,6 @@
 package gameClient;
 
-import api.directed_weighted_graph;
-import api.edge_data;
-import api.geo_location;
-import api.node_data;
+import api.*;
 import gameClient.util.Point3D;
 import gameClient.util.Range;
 import gameClient.util.Range2D;
@@ -53,6 +50,16 @@ public class MyPanel extends JPanel {
         return image;
     }
 
+    public BufferedImage headerImage(){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("pictures/Pokemon-Logo.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return image;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,10 +67,19 @@ public class MyPanel extends JPanel {
         drawGraph(g);
         drawAgants(g);
         drawInfo(g);
+        drawHeader(g);
         updateFrame();
     }
 
-    private void timer(){
+    public void drawHeader(Graphics g){
+        g.drawImage(headerImage(),250,0,500,200,this);
+
+        Font font = new Font("Ariel", Font.BOLD, 14);
+        g.setFont(font);
+        g.setColor(Color.red);
+        g.drawString("Time to end: "+_ar.getTimeToEnd()+" seconds  | ",250,200);
+        g.drawString("Level:       |  ",450,200);
+        g.drawString("Score: ",550,200);
     }
 
     private void updateFrame() {
