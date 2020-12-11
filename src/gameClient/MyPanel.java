@@ -9,11 +9,13 @@ import gameClient.util.Range2Range;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class MyPanel extends JPanel {
@@ -60,26 +62,47 @@ public class MyPanel extends JPanel {
         return image;
     }
 
+    public BufferedImage homeImage(){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("pictures/home.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return image;
+    }
+
+    public BufferedImage backgroundImage(){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("pictures/background.jpg"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return image;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawPokemons(g);
-        drawGraph(g);
-        drawAgants(g);
-        drawInfo(g);
+        g.drawImage(backgroundImage(),0,0,this);
         drawHeader(g);
+        drawGraph(g);
+        drawPokemons(g);
+        drawAgants(g);
         updateFrame();
     }
 
     public void drawHeader(Graphics g){
-        g.drawImage(headerImage(),250,0,500,200,this);
+        g.drawImage(headerImage(),250,0,getWidth()-500,getHeight()-300,this);
 
-        Font font = new Font("Ariel", Font.BOLD, 14);
+        Font font = new Font("Copperplate Gothic Bold",Font.PLAIN,22);
         g.setFont(font);
-        g.setColor(Color.red);
-        g.drawString("Time to end: "+_ar.getTimeToEnd()+" seconds  | ",250,200);
-        g.drawString("Level:       |  ",450,200);
-        g.drawString("Score: ",550,200);
+        g.setColor(Color.black);
+        g.drawString("Time left: "+_ar.getTimeToEnd()+" seconds     |     ",10,30);
+        g.drawString("Level: "+_ar.get_info().get("gameLevel")+"     |     ",350,30);
+        g.drawString("Score: "+_ar.get_info().get("grade")+"     |     ",520,30);
+        g.drawString("Moves: "+_ar.get_info().get("moves"),700, 30);
     }
 
     private void updateFrame() {
@@ -90,26 +113,18 @@ public class MyPanel extends JPanel {
         _w2f = Arena.w2f(g,frame);
     }
 
-    private void drawInfo(Graphics g) {
-        List<String> str = _ar.get_info();
-        String dt = "none";
-        for (int i = 0; i < str.size(); i++) {
-            g.drawString(str.get(i) + " dt: " + dt, 100, 60 + i * 20);
-        }
-
-    }
-
     private void drawGraph(Graphics g) {
         directed_weighted_graph gg = _ar.getGraph();
 
         for(node_data n : gg.getV()){
             g.setColor(Color.BLACK);
-            drawNode(n,5,g);
-
             for(edge_data e : gg.getE(n.getKey())){
-                g.setColor(Color.gray);
                 drawEdge(e,g);
             }
+        }
+
+        for(node_data n : gg.getV()){
+            drawNode(n,5,g);
         }
     }
 
@@ -159,17 +174,23 @@ public class MyPanel extends JPanel {
         geo_location pos = n.getLocation();
         geo_location fp = this._w2f.world2frame(pos);
         g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
-        g.drawString("" + n.getKey(), (int) fp.x(), (int) fp.y() - 4 * r);
+        g.drawImage(homeImage(),(int) fp.x() - r-10, (int) fp.y() - r-14, 8 * r, 8 * r,this);
+//        g.drawString("" + n.getKey(), (int) fp.x(), (int) fp.y() - 4 * r);
     }
 
     private void drawEdge(edge_data e, Graphics g) {
+        g.setColor(new Color(153,102,0));
         directed_weighted_graph gg = _ar.getGraph();
         geo_location s = gg.getNode(e.getSrc()).getLocation();
         geo_location d = gg.getNode(e.getDest()).getLocation();
         geo_location s0 = this._w2f.world2frame(s);
         geo_location d0 = this._w2f.world2frame(d);
         g.drawLine((int) s0.x(), (int) s0.y(), (int) d0.x(), (int) d0.y());
-        //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
+//        g.drawImage(roadImage(),(int) s0.x(), (int) s0.y(), 20, 20,this);
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(14));
+
     }
 
 }

@@ -18,12 +18,10 @@ import java.awt.*;
 public class MyFrame extends JFrame {
 	private Arena _ar;
 	private gameClient.util.Range2Range _w2f;
-	private game_service game;
 
 	MyFrame(String a,Arena ar) {
 		super(a);
 		this._ar = ar;
-		this.game = game;
 		initFrame();
 		updateFrame();
 		initPanel();
