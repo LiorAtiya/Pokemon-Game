@@ -12,9 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class represents a multi Agents Arena which move on a graph - grabs Pokemons and avoid the Zombies.
@@ -26,36 +24,64 @@ public class Arena {
 	private directed_weighted_graph _gg;
 	private List<CL_Agent> _agents;
 	private List<CL_Pokemon> _pokemons;
-	private List<String> _info;
+	private Map<String,Integer> _info;
 	private long timer;
 	private static Point3D MIN = new Point3D(0, 100,0);
 	private static Point3D MAX = new Point3D(0, 100,0);
 
-	public Arena() {;
-		_info = new ArrayList<String>();
-	}
-	private Arena(directed_weighted_graph g, List<CL_Agent> r, List<CL_Pokemon> p) {
-		_gg = g;
-		this.setAgents(r);
-		this.setPokemons(p);
-	}
+//	public Arena() {;
+//		_info = new HashMap<>();
+//	}
+//	private Arena(directed_weighted_graph g, List<CL_Agent> r, List<CL_Pokemon> p) {
+//		_gg = g;
+//		this.setAgents(r);
+//		this.setPokemons(p);
+//	}
+
 	public void setPokemons(List<CL_Pokemon> f) {
 		this._pokemons = f;
 	}
+	public List<CL_Pokemon> getPokemons() {return _pokemons;}
+
 	public void setAgents(List<CL_Agent> f) {
 		this._agents = f;
 	}
+	public List<CL_Agent> getAgents() {return _agents;}
 
 	public void setTimeToEnd(long time){
-//		this.timer = (int) ((time / 1000) % 60);
 		this.timer = time;
 	}
-
 	public long getTimeToEnd(){
 		return this.timer;
 	}
 
-	public void setGraph(directed_weighted_graph g) {this._gg =g;}//init();}
+	public void setGraph(directed_weighted_graph g) {this._gg =g;}
+	public directed_weighted_graph getGraph() {
+		return _gg;
+	}
+
+	public Map<String,Integer> get_info() {
+		return _info;
+	}
+
+	public void set_info(String _info) {
+		Map<String,Integer> info = new HashMap<>();
+		try {
+			JSONObject infoObj = new JSONObject(_info);
+			int moves = infoObj.getJSONObject("GameServer").getInt("moves");
+			int grade = infoObj.getJSONObject("GameServer").getInt("grade");
+			int gameLevel = infoObj.getJSONObject("GameServer").getInt("game_level");
+
+			info.put("moves",moves);
+			info.put("grade", grade);
+			info.put("gameLevel", gameLevel);
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		this._info = info;
+
+	}
 
 	private void init( ) {
 		MIN=null; MAX=null;
@@ -73,19 +99,6 @@ public class Arena {
 		MIN = new Point3D(x0-dx/10,y0-dy/10);
 		MAX = new Point3D(x1+dx/10,y1+dy/10);
 
-	}
-	public List<CL_Agent> getAgents() {return _agents;}
-	public List<CL_Pokemon> getPokemons() {return _pokemons;}
-
-
-	public directed_weighted_graph getGraph() {
-		return _gg;
-	}
-	public List<String> get_info() {
-		return _info;
-	}
-	public void set_info(List<String> _info) {
-		this._info = _info;
 	}
 
 	////////////////////////////////////////////////////
