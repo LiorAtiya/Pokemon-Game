@@ -146,7 +146,7 @@ public class MyPanel extends JPanel {
 
                     geo_location fp = this._w2f.world2frame(c);
 //                    g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
-                    g.drawImage(importImagePokemon(),(int) fp.x() - r,(int) fp.y() - r,3 * r,3 * r,this);
+                    g.drawImage(importImagePokemon(),(int) fp.x() - r,(int) fp.y() - r-2,4 * r,4 * r,this);
                     //	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
 
                 }
@@ -165,7 +165,7 @@ public class MyPanel extends JPanel {
             if (c != null) {
                 geo_location fp = this._w2f.world2frame(c);
 //                g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
-                g.drawImage(importImage(),(int) fp.x() - r,(int) fp.y() - r,4 * r,4 * r,this);
+                g.drawImage(importImage(),(int) fp.x() - r,(int) fp.y() - r-2,6 * r,6 * r,this);
             }
         }
     }
