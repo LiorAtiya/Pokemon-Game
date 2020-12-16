@@ -10,6 +10,7 @@ public class CL_Pokemon {
 	private Point3D _pos;
 	private double min_dist;
 	private int min_ro;
+	private int id;
 
 	public CL_Pokemon(Point3D p, int t, double v, edge_data e) {
 		_type = t;
@@ -20,8 +21,12 @@ public class CL_Pokemon {
 		min_ro = -1;
 	}
 
-	public CL_Pokemon(){
+	public void setID(int id){
+		this.id = id;
+	}
 
+	public int getID(){
+		return this.id;
 	}
 
 	public CL_Pokemon init_from_json(String json) {
