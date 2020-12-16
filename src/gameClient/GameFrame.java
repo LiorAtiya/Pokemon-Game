@@ -1,18 +1,5 @@
 package gameClient;
-
-import api.directed_weighted_graph;
-import api.edge_data;
-import api.geo_location;
-import api.node_data;
-import gameClient.util.Point3D;
-import gameClient.util.Range;
-import gameClient.util.Range2D;
-import gameClient.util.Range2Range;
-
 import javax.swing.*;
-import java.awt.*;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * This class represents a very simple GUI class to present a
@@ -22,13 +9,11 @@ import java.util.List;
  *
  */
 public class GameFrame extends JFrame{
-	private int _ind;
 
 	GameFrame(String a, Arena ar) {
 		super(a);
 		initFrame();
 		initGamePanel(ar);
-		int _ind = 0;
 	}
 
 	private void initFrame(){
