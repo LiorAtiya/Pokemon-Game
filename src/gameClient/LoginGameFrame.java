@@ -45,7 +45,7 @@ public class LoginGameFrame extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(new LoginGameFrame(), "Invalid ID");
                 } else {
                     int id = Integer.parseInt(sID);
-                    Thread client = new Thread(new MainGame(level, id));
+                    Thread client = new Thread(new MainGame(id,level));
                     client.start();
                 }
                 dispose();
