@@ -7,24 +7,23 @@ import api.node_data;
 import gameClient.util.Point3D;
 import org.json.JSONObject;
 
-public class CL_Agent {
+public class Agent {
 	public static final double EPS = 0.0001;
 	private static int _count = 0;
 	private static int _seed = 3331;
 	private int _id;
-	//	private long _key;
 	private geo_location _pos;
 	private double _speed;
 	private edge_data _curr_edge;
 	private node_data _curr_node;
 	private directed_weighted_graph _gg;
-	private CL_Pokemon _curr_fruit;
+	private Pokemon _curr_fruit;
 	private long _sg_dt;
 
 	private double _value;
 
 
-	public CL_Agent(directed_weighted_graph g, int start_node) {
+	public Agent(directed_weighted_graph g, int start_node) {
 		_gg = g;
 		setMoney(0);
 		this._curr_node = _gg.getNode(start_node);
@@ -133,10 +132,10 @@ public class CL_Agent {
 	public void setSpeed(double v) {
 		this._speed = v;
 	}
-	public CL_Pokemon get_curr_fruit() {
+	public Pokemon get_curr_fruit() {
 		return _curr_fruit;
 	}
-	public void set_curr_fruit(CL_Pokemon curr_fruit) {
+	public void set_curr_fruit(Pokemon curr_fruit) {
 		this._curr_fruit = curr_fruit;
 	}
 	public void set_SDT(long ddtt) {

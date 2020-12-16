@@ -5,24 +5,21 @@ import api.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
-public class Ex2_Client implements Runnable {
+public class MainGame implements Runnable {
     private static GameFrame _win;
     private static Arena _ar;
-    private static int scenario_num = -1;
+    private int scenario_num;
+    private long id;
 
-    public Ex2_Client(int level){
-        scenario_num = level;
-    }
-
-    public static void main(String[] args) {
-        Frame login = new LoginGameFrame();
+    public MainGame(int level,long id){
+        this.scenario_num = level;
+        this.id = id;
     }
 
     @Override
@@ -38,8 +35,7 @@ public class Ex2_Client implements Runnable {
 
         //Create game
         game_service game = Game_Server_Ex2.getServer(scenario_num); // you have [0,23] games
-        //	int id = 9999999;
-        //	game.login(id);
+//        game.login(this.id);
 
         //Load graph
         dw_graph_algorithms algoGraph = new DWGraph_Algo();
@@ -58,26 +54,24 @@ public class Ex2_Client implements Runnable {
 
         game.startGame();
         _win.setTitle("Pokemon Game : " + game.toString());
-        int ind = 0;
         long dt = 0;
 
         while (game.isRunning()) {
             moveAgents(game, gg);
             try {
-//				if(ind%3 == 0) {_win.repaint();}
                 _win.repaint();
-                List<CL_Agent> log = _ar.getAgents();
-                CL_Agent minAg = log.get(0);
+                List<Agent> log = _ar.getAgents();
+                Agent maxAg = log.get(0);
                 for (int i = 0; i < log.size(); i++) {
-                    if (log.get(i).getSpeed() > minAg.getSpeed()) {
-                        minAg = log.get(i);
+                    if (log.get(i).getSpeed() > maxAg.getSpeed()) {
+                        maxAg = log.get(i);
                     }
                 }
-                if (minAg.getSpeed() == 1.0) dt = 100;
-                else if (minAg.getSpeed() == 2.0) dt = 95;
-                else if (minAg.getSpeed() == 5.0) dt = 90;
+                if (maxAg.getSpeed() == 1.0) dt = 100;
+                else if (maxAg.getSpeed() == 2.0) dt = 95;
+                else if (maxAg.getSpeed() == 5.0) dt = 90;
                 Thread.sleep(dt);
-//                    ind++;
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -86,7 +80,6 @@ public class Ex2_Client implements Runnable {
         String result = game.toString();
 
         System.out.println(result);
-//		System.exit(0);
     }
 
     /**
@@ -104,14 +97,14 @@ public class Ex2_Client implements Runnable {
         _ar.set_info(game.toString());
 
         String lg = game.move();
-        List<CL_Agent> log = Arena.getAgents(lg, gg);
+        List<Agent> log = Arena.getAgents(lg, gg);
         _ar.setAgents(log);
 
         String fs = game.getPokemons();
-        List<CL_Pokemon> ffs = Arena.json2Pokemons(fs);
+        List<Pokemon> ffs = Arena.json2Pokemons(fs);
         _ar.setPokemons(ffs);
         for (int i = 0; i < log.size(); i++) {
-            CL_Agent ag = log.get(i);
+            Agent ag = log.get(i);
             int id = ag.getID();
             int dest = ag.getNextNode();
             int src = ag.getSrcNode();
@@ -138,11 +131,11 @@ public class Ex2_Client implements Runnable {
         return ans;
     }
 
-    private static PriorityQueue<CL_Pokemon> pQueue = new PriorityQueue<>();
+    private static PriorityQueue<Pokemon> pQueue = new PriorityQueue<>();
 
-    public class PokemonComparator implements Comparator<CL_Pokemon> {
+    public class PokemonComparator implements Comparator<Pokemon> {
         @Override
-        public int compare(CL_Pokemon o1, CL_Pokemon o2) {
+        public int compare(Pokemon o1, Pokemon o2) {
             int ans = 0;
             if (o1.getMin_dist() - o2.getMin_dist() > 0) ans = 1;
             else if (o1.getMin_dist() - o2.getMin_dist() < 0) ans = -1;
@@ -152,7 +145,7 @@ public class Ex2_Client implements Runnable {
 
     public static int strategy4(directed_weighted_graph g, int src) {
         int ans = -1;
-        List<CL_Pokemon> listPokemon = _ar.getPokemons();
+        List<Pokemon> listPokemon = _ar.getPokemons();
         dw_graph_algorithms dga = new DWGraph_Algo();
         for (int i = 0; i < listPokemon.size(); i++) {
             Arena.updateEdge(listPokemon.get(i), g);
@@ -161,7 +154,7 @@ public class Ex2_Client implements Runnable {
             pQueue.add(listPokemon.get(i));
         }
 
-        CL_Pokemon better = pQueue.remove();
+        Pokemon better = pQueue.remove();
         List<node_data> listNodes = dga.shortestPath(src, better.get_edge().getSrc());
         listNodes.add(g.getNode(better.get_edge().getDest()));
 
@@ -178,8 +171,8 @@ public class Ex2_Client implements Runnable {
     //me
     public static int strategy3(directed_weighted_graph g, int src) {
         int ans = -1;
-        List<CL_Pokemon> listPokemon = _ar.getPokemons();
-        CL_Pokemon better = listPokemon.get(0);
+        List<Pokemon> listPokemon = _ar.getPokemons();
+        Pokemon better = listPokemon.get(0);
         for (int i = 0; i < listPokemon.size(); i++) {
             if (listPokemon.get(i).getValue() > better.getValue()) {
                 better = listPokemon.get(i);
@@ -215,8 +208,8 @@ public class Ex2_Client implements Runnable {
 
     public static int strategy2(directed_weighted_graph g, int src) {
         int ans = -1;
-        List<CL_Pokemon> listPokemom = _ar.getPokemons();
-        CL_Pokemon better = listPokemom.get(0);
+        List<Pokemon> listPokemom = _ar.getPokemons();
+        Pokemon better = listPokemom.get(0);
         for (int i = 0; i < listPokemom.size(); i++) {
             Arena.updateEdge(listPokemom.get(i), g);
         }
@@ -247,8 +240,8 @@ public class Ex2_Client implements Runnable {
     //Eats pokemon by the best value(high score)
     private static int strategy1(directed_weighted_graph g, int src) {
         int ans = -1;
-        List<CL_Pokemon> listPokemom = _ar.getPokemons();
-        CL_Pokemon better = listPokemom.get(0);
+        List<Pokemon> listPokemom = _ar.getPokemons();
+        Pokemon better = listPokemom.get(0);
 
         dw_graph_algorithms wga = new DWGraph_Algo();
         wga.init(g);
@@ -278,7 +271,7 @@ public class Ex2_Client implements Runnable {
 
     private void init(game_service game,directed_weighted_graph graph) {
 
-        ArrayList<CL_Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
+        ArrayList<Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
         for (int a = 0; a < pokemonList.size(); a++) {
             Arena.updateEdge(pokemonList.get(a), graph);
         }
@@ -295,7 +288,7 @@ public class Ex2_Client implements Runnable {
             int numOfAgents = gameObject.getInt("agents");
 
             for (int i = 0; i < numOfAgents ; i++) {
-                CL_Pokemon c = pokemonList.get(i);
+                Pokemon c = pokemonList.get(i);
                 int nn = c.get_edge().getSrc();
                 game.addAgent(nn);
             }
@@ -310,7 +303,7 @@ public class Ex2_Client implements Runnable {
         }
     }
 
-    public void initArena(directed_weighted_graph g, List<CL_Pokemon> p) {
+    public void initArena(directed_weighted_graph g, List<Pokemon> p) {
         this._ar = new Arena();
         this._ar.setGraph(g);
         this._ar.setPokemons(p);

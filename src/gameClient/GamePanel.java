@@ -12,16 +12,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 public class GamePanel extends JPanel {
 
-    private int _ind;
     private Arena _ar;
     private Range2Range _w2f;
-    private static geo_location prevPos;
-    private static int prevImg;
 
     public GamePanel(Arena ar) {
         this._ar = ar;
@@ -49,7 +45,6 @@ public class GamePanel extends JPanel {
     }
 
     public void drawHeader(Graphics g) {
-
         Font font = new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
         g.setFont(font);
         g.setColor(Color.black);
@@ -65,8 +60,6 @@ public class GamePanel extends JPanel {
         Range2D frame = new Range2D(rx, ry);
         directed_weighted_graph g = _ar.getGraph();
         _w2f = Arena.w2f(g, frame);
-        CL_Pokemon firstPok = _ar.getPokemons().get(0);
-        prevPos = this._w2f.world2frame(firstPok.getLocation());
     }
 
     private void drawGraph(Graphics g) {
@@ -85,56 +78,32 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPokemons(Graphics g) {
-        List<CL_Pokemon> fs = _ar.getPokemons();
+        List<Pokemon> fs = _ar.getPokemons();
         for (int i = 0; i < fs.size(); i++) {
-            fs.get(i).setID(i + 1);
-        }
+            Pokemon currentPok = fs.get(i);
+            currentPok.setID(i + 1);
 
-        if (fs != null) {
-            Iterator<CL_Pokemon> itr = fs.iterator();
-
-            while (itr.hasNext()) {
-
-                CL_Pokemon f = itr.next();
-                Point3D c = f.getLocation();
-                int r = 10;
-                g.setColor(Color.green);
-                if (f.getType() < 0) {
-                    g.setColor(Color.orange);
-                }
-                if (c != null) {
-                    geo_location fp = this._w2f.world2frame(c);
-                    g.drawImage(importImage("data/pictures/" + f.getID() + ".png"), (int) fp.x() - r - 7, (int) fp.y() - r - 7, 4 * r, 4 * r, this);
-//                    	g.drawString(""+n.getKey(), fp.ix(), fp.iy()-4*r);
-//                        g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
-
-                }
-            }
+            Point3D c = currentPok.getLocation();
+            geo_location fp = this._w2f.world2frame(c);
+            g.drawImage(importImage("data/pictures/" + currentPok.getID() + ".png"), (int) fp.x() - 17, (int) fp.y() - 17, 32, 32, this);
         }
     }
 
     private void drawAgants(Graphics g) {
-        List<CL_Agent> listAgents = _ar.getAgents();
-//        g.setColor(Color.red);
-        int i = 0;
-        while (listAgents != null && i < listAgents.size()) {
+        List<Agent> listAgents = _ar.getAgents();
+
+        for(int i=0 ; i < listAgents.size() ; i++){
             geo_location c = listAgents.get(i).getLocation();
-            int r = 8;
-            i++;
-            if (c != null) {
-                geo_location pos = this._w2f.world2frame(c);
-//                g.fillOval((int) pos.x() - r, (int) pos.y() - r, 2 * r, 2 * r);
-                g.drawImage(importImage("data/pictures/agent.png"), (int) pos.x() - r - 5, (int) pos.y() - r - 5, 4 * r, 4 * r, this);
-            }
+            geo_location pos = this._w2f.world2frame(c);
+            g.drawImage(importImage("data/pictures/agent.png"), (int) pos.x() - 13, (int) pos.y() - 13, 32, 32, this);
         }
+//
     }
 
     private void drawNode(node_data n, int r, Graphics g) {
         geo_location pos = n.getLocation();
         geo_location fp = this._w2f.world2frame(pos);
         g.drawImage(importImage("data/pictures/home.png"), (int) fp.x() - r - 10, (int) fp.y() - r - 14, 8 * r, 8 * r, this);
-//        g.drawString("" + n.getKey(), (int) fp.x(), (int) fp.y() - 4 * r);
-//        g.fillOval((int) fp.x() - r, (int) fp.y() - r, 2 * r, 2 * r);
     }
 
     private void drawEdge(edge_data e, Graphics g) {
