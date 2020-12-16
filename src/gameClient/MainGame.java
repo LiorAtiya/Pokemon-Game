@@ -17,9 +17,9 @@ public class MainGame implements Runnable {
     private int scenario_num;
     private long id;
 
-    public MainGame(int level,long id){
-        this.scenario_num = level;
+    public MainGame(long id,int level){
         this.id = id;
+        this.scenario_num = level;
     }
 
     @Override
