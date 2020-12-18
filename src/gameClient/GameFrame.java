@@ -17,6 +17,7 @@ public class GameFrame extends JFrame{
 	}
 
 	private void initFrame(){
+		this.pack();
 		this.setSize(1000,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

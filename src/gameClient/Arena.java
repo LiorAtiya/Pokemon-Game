@@ -22,7 +22,7 @@ import java.util.*;
 public class Arena {
 	public static final double EPS1 = 0.001, EPS2=EPS1*EPS1, EPS=EPS2;
 	private directed_weighted_graph _gg;
-	private List<Agent> _agents;
+	private static List<Agent> _agents;
 	private List<Pokemon> _pokemons;
 	private Map<String,Integer> _info;
 	private long timer;
@@ -46,7 +46,7 @@ public class Arena {
 	public void setAgents(List<Agent> f) {
 		this._agents = f;
 	}
-	public List<Agent> getAgents() {return _agents;}
+	public static List<Agent> getAgents() {return _agents;}
 
 	public void setTimeToEnd(long time){
 		this.timer = time;
