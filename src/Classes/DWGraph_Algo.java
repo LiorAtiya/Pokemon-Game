@@ -1,5 +1,6 @@
-package api;
+package Classes;
 
+import api.*;
 import com.google.gson.*;
 import gameClient.util.Point3D;
 
@@ -49,8 +50,8 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         if (graph.getV().isEmpty()) return true;
 
         for (node_data i : graph.getV()) {
-//            BFS(graph.getNode(i.getKey()));
-            Dijkstra(this.graph, graph.getNode(i.getKey()));
+            BFS(graph.getNode(i.getKey()));
+//            Dijkstra(this.graph, graph.getNode(i.getKey()));
 
             for (node_data x : graph.getV()) {
                 if (x.getWeight() == Double.MAX_VALUE) return false;

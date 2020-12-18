@@ -1,5 +1,8 @@
-package tests;
+package test;
 
+import Classes.DWGraph_Algo;
+import Classes.DWGraph_DS;
+import Classes.NodeData;
 import api.*;
 import org.junit.jupiter.api.Test;
 
