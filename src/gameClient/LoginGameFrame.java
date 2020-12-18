@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class LoginGameFrame extends JFrame implements ActionListener {
 
-    private static JComboBox chooseField;
+//    private static JComboBox chooseField;
 
     public LoginGameFrame() {
         initLoginGame();
@@ -25,25 +25,39 @@ public class LoginGameFrame extends JFrame implements ActionListener {
         JLabel choose = new JLabel();
         choose.setText("Choose level :");
         choose.setBounds(20, 63, 100, 100);
-        String[] levels = new String[24];
-        for (int i = 0; i < levels.length; i++) {
-            levels[i] = "" + i;
-        }
-        chooseField = new JComboBox(levels);
-        chooseField.addActionListener(this);
-        chooseField.setBounds(110, 100, 130, 30);
+        JTextField textfieldLevel = new JTextField();
+        textfieldLevel.setBounds(110, 100, 130, 30);
+//        String[] levels = new String[24];
+//        for (int i = 0; i < levels.length; i++) {
+//            levels[i] = "" + i;
+//        }
+//        chooseField = new JComboBox(levels);
+//        chooseField.addActionListener(this);
+//        chooseField.setBounds(110, 100, 130, 30);
 
         JButton buttonStart = new JButton("Start");
         buttonStart.setBounds(75, 170, 140, 40);
 
+        this.add(id);
+        this.add(textfieldID);
+        this.add(choose);
+        this.add(textfieldLevel);
+        this.add(buttonStart);
+        this.setSize(300, 300);
+        this.setLayout(null);
+        this.setVisible(true);
+        windowCenter();
+
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int level = Integer.parseInt((String) (chooseField.getSelectedItem()));
+//                int level = Integer.parseInt((String) (chooseField.getSelectedItem()));
                 String sID = textfieldID.getText();
-                if (!sID.matches("[0-9]+") || sID.length() < 2) {
+                String sLevel = textfieldLevel.getText();
+                if (!sID.matches("[0-9]+") || !sLevel.matches("[0-9]+") || sID.length() == 0) {
                     JOptionPane.showMessageDialog(new LoginGameFrame(), "Invalid ID");
                 } else {
+                    int level = Integer.parseInt(sLevel);
                     int id = Integer.parseInt(sID);
                     Thread client = new Thread(new MainGame(id,level));
                     client.start();
@@ -52,15 +66,6 @@ public class LoginGameFrame extends JFrame implements ActionListener {
             }
         });
 
-        this.add(id);
-        this.add(textfieldID);
-        this.add(choose);
-        this.add(chooseField);
-        this.add(buttonStart);
-        this.setSize(300, 300);
-        this.setLayout(null);
-        this.setVisible(true);
-        windowCenter();
     }
 
     private void windowCenter() {

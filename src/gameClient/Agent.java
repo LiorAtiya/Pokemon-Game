@@ -19,9 +19,8 @@ public class Agent {
 	private directed_weighted_graph _gg;
 	private Pokemon _curr_fruit;
 	private long _sg_dt;
-
 	private double _value;
-
+	private geo_location target;
 
 	public Agent(directed_weighted_graph g, int start_node) {
 		_gg = g;
@@ -31,6 +30,16 @@ public class Agent {
 		_id = -1;
 		setSpeed(0);
 	}
+
+	public void setTarget(geo_location pos){
+		this.target = pos;
+	}
+
+	public geo_location getTarget(){
+		return this.target;
+	}
+
+
 	public void update(String json) {
 		JSONObject line;
 		try {
@@ -98,12 +107,10 @@ public class Agent {
 		return ans;
 	}
 	public int getID() {
-		// TODO Auto-generated method stub
 		return this._id;
 	}
 
 	public geo_location getLocation() {
-		// TODO Auto-generated method stub
 		return _pos;
 	}
 

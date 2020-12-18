@@ -45,13 +45,17 @@ public class GamePanel extends JPanel {
     }
 
     public void drawHeader(Graphics g) {
-        Font font = new Font("Copperplate Gothic Bold", Font.PLAIN, 22);
+        Font font = new Font("Copperplate Gothic Bold", Font.PLAIN, 18);
         g.setFont(font);
         g.setColor(Color.black);
-        g.drawString("Time left: " + _ar.getTimeToEnd() + " seconds     |     ", 10, 30);
-        g.drawString("Level: " + _ar.get_info().get("gameLevel") + "     |     ", 350, 30);
-        g.drawString("Score: " + _ar.get_info().get("grade") + "     |     ", 520, 30);
-        g.drawString("Moves: " + _ar.get_info().get("moves"), 720, 30);
+        List<Agent> listAgent = _ar.getAgents();
+        for(int i = 0 ; i < listAgent.size() ; i++){
+            g.drawString("Agent "+listAgent.get(i).getID()+": "+listAgent.get(i).getValue(),800,(i+1)*30);
+        }
+        g.drawString("Time left: " + _ar.getTimeToEnd() + " seconds  |", 10, 30);
+        g.drawString("Level: " + _ar.get_info().get("gameLevel") + "     |", 270, 30);
+        g.drawString("Score: " + _ar.get_info().get("grade") + "     |", 420, 30);
+        g.drawString("Moves: " + _ar.get_info().get("moves"), 600, 30);
     }
 
     private void updateFrame() {

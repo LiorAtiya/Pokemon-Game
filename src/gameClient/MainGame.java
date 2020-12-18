@@ -2,6 +2,7 @@ package gameClient;
 
 import Server.Game_Server_Ex2;
 import api.*;
+import gameClient.util.Point3D;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,22 +17,15 @@ public class MainGame implements Runnable {
     private static Arena _ar;
     private int scenario_num;
     private long id;
+    private static long dt = 0;
 
-    public MainGame(long id,int level){
+    public MainGame(long id, int level) {
         this.id = id;
         this.scenario_num = level;
     }
 
     @Override
     public void run() {
-
-        //Choose game level in the console
-//        Scanner in = new Scanner(System.in);
-//        int scenario_num;
-//        do {
-//            System.out.print("Enter scenario number: ");
-//            scenario_num = in.nextInt();
-//        } while (scenario_num > 23);
 
         //Create game
         game_service game = Game_Server_Ex2.getServer(scenario_num); // you have [0,23] games
@@ -50,7 +44,7 @@ public class MainGame implements Runnable {
 
         directed_weighted_graph gg = algoGraph.getGraph();
 
-        init(game,gg);
+        init(game, gg);
 
         game.startGame();
         _win.setTitle("Pokemon Game : " + game.toString());
@@ -67,9 +61,9 @@ public class MainGame implements Runnable {
                         maxAg = log.get(i);
                     }
                 }
-                if (maxAg.getSpeed() == 1.0) dt = 100;
-                else if (maxAg.getSpeed() == 2.0) dt = 95;
-                else if (maxAg.getSpeed() == 5.0) dt = 90;
+                if (maxAg.getSpeed() == 1.0) dt = 120;
+                else if (maxAg.getSpeed() == 2.0) dt = 110;
+                else if (maxAg.getSpeed() == 5.0) dt = 100;
                 Thread.sleep(dt);
 
             } catch (Exception e) {
@@ -111,7 +105,7 @@ public class MainGame implements Runnable {
             double v = ag.getValue();
             double s = ag.getSpeed();
             if (dest == -1) {
-                dest = nextNode(gg, src);
+                dest = nextNode(gg, src,ag);
                 game.chooseNextEdge(ag.getID(), dest);
                 System.out.println("Agent: " + id + " | Value: " + v + " | Speed : " + s + " | Move to node: " + dest);
                 System.out.println("Time left: " + seconds + " seconds");
@@ -126,101 +120,115 @@ public class MainGame implements Runnable {
      * @param src
      * @return
      */
-    private static int nextNode(directed_weighted_graph g, int src) {
-        int ans = strategy2(g, src);
+    private static int nextNode(directed_weighted_graph g, int src, Agent ag) {
+        int ans = strategy2(g, src, ag);
         return ans;
     }
 
-    private static PriorityQueue<Pokemon> pQueue = new PriorityQueue<>();
+//    private static PriorityQueue<Pokemon> pQueue = new PriorityQueue<>();
+//
+//    public class PokemonComparator implements Comparator<Pokemon> {
+//        @Override
+//        public int compare(Pokemon o1, Pokemon o2) {
+//            int ans = 0;
+//            if (o1.getMin_dist() - o2.getMin_dist() > 0) ans = 1;
+//            else if (o1.getMin_dist() - o2.getMin_dist() < 0) ans = -1;
+//            return ans;
+//        }
+//    }
+//
+//    public static int strategy4(directed_weighted_graph g, int src) {
+//        int ans = -1;
+//        List<Pokemon> listPokemon = _ar.getPokemons();
+//        dw_graph_algorithms dga = new DWGraph_Algo();
+//        for (int i = 0; i < listPokemon.size(); i++) {
+//            Arena.updateEdge(listPokemon.get(i), g);
+//            double weight = dga.shortestPathDist(src, listPokemon.get(i).get_edge().getSrc());
+//            listPokemon.get(i).setMin_dist(weight);
+//            pQueue.add(listPokemon.get(i));
+//        }
+//
+//        Pokemon better = pQueue.remove();
+//        List<node_data> listNodes = dga.shortestPath(src, better.get_edge().getSrc());
+//        listNodes.add(g.getNode(better.get_edge().getDest()));
+//
+//        if (listNodes.size() > 1) {
+//            ans = listNodes.get(1).getKey();
+//        } else {
+//            ans = listNodes.get(0).getKey();
+//        }
+//        return ans;
+//
+//    }
+//
+//
+//    //me
+//    public static int strategy3(directed_weighted_graph g, int src) {
+//        int ans = -1;
+//        List<Pokemon> listPokemon = _ar.getPokemons();
+//        Pokemon better = listPokemon.get(0);
+//        for (int i = 0; i < listPokemon.size(); i++) {
+//            if (listPokemon.get(i).getValue() > better.getValue()) {
+//                better = listPokemon.get(i);
+//            }
+//        }
+//        for (int i = 0; i < listPokemon.size(); i++) {
+//            Arena.updateEdge(listPokemon.get(i), g);
+//        }
+//
+//        dw_graph_algorithms wga = new DWGraph_Algo();
+//        wga.init(g);
+//
+//        for (int i = 0; i < listPokemon.size(); i++) {
+//            if (wga.shortestPathDist(src, listPokemon.get(i).get_edge().getSrc())
+//                    <= wga.shortestPathDist(src, better.get_edge().getSrc())) {
+//                better = listPokemon.get(i);
+//            }
+//        }
+//
+//        int startEdge = better.get_edge().getSrc();
+//        List<node_data> listNodes = wga.shortestPath(src, startEdge);
+//        listNodes.add(g.getNode(better.get_edge().getDest()));
+//
+//        if (listNodes.size() > 1) {
+//            ans = listNodes.get(1).getKey();
+//        } else {
+//            ans = listNodes.get(0).getKey();
+//        }
+//        return ans;
+//    }
 
-    public class PokemonComparator implements Comparator<Pokemon> {
-        @Override
-        public int compare(Pokemon o1, Pokemon o2) {
-            int ans = 0;
-            if (o1.getMin_dist() - o2.getMin_dist() > 0) ans = 1;
-            else if (o1.getMin_dist() - o2.getMin_dist() < 0) ans = -1;
-            return ans;
-        }
-    }
-
-    public static int strategy4(directed_weighted_graph g, int src) {
-        int ans = -1;
-        List<Pokemon> listPokemon = _ar.getPokemons();
-        dw_graph_algorithms dga = new DWGraph_Algo();
-        for (int i = 0; i < listPokemon.size(); i++) {
-            Arena.updateEdge(listPokemon.get(i), g);
-            double weight = dga.shortestPathDist(src, listPokemon.get(i).get_edge().getSrc());
-            listPokemon.get(i).setMin_dist(weight);
-            pQueue.add(listPokemon.get(i));
-        }
-
-        Pokemon better = pQueue.remove();
-        List<node_data> listNodes = dga.shortestPath(src, better.get_edge().getSrc());
-        listNodes.add(g.getNode(better.get_edge().getDest()));
-
-        if (listNodes.size() > 1) {
-            ans = listNodes.get(1).getKey();
-        } else {
-            ans = listNodes.get(0).getKey();
-        }
-        return ans;
-
-    }
 
 
-    //me
-    public static int strategy3(directed_weighted_graph g, int src) {
-        int ans = -1;
-        List<Pokemon> listPokemon = _ar.getPokemons();
-        Pokemon better = listPokemon.get(0);
-        for (int i = 0; i < listPokemon.size(); i++) {
-            if (listPokemon.get(i).getValue() > better.getValue()) {
-                better = listPokemon.get(i);
-            }
-        }
-        for (int i = 0; i < listPokemon.size(); i++) {
-            Arena.updateEdge(listPokemon.get(i), g);
-        }
+//    private static boolean checkTarget(Agent ag){
+//        List<Agent> listA = Arena.getAgents();
+//        for(int i=0 ; i < listA.size() ; i++){
+//            if(ag.getID() != i && (listA.get(i).getTarget() == ag.getTarget()) ){
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
+    public static int strategy2(directed_weighted_graph g, int src, Agent ag) {
+        int ans;
         dw_graph_algorithms wga = new DWGraph_Algo();
         wga.init(g);
 
-        for (int i = 0; i < listPokemon.size(); i++) {
-            if (wga.shortestPathDist(src, listPokemon.get(i).get_edge().getSrc())
-                    <= wga.shortestPathDist(src, better.get_edge().getSrc())) {
-                better = listPokemon.get(i);
-            }
-        }
-
-        int startEdge = better.get_edge().getSrc();
-        List<node_data> listNodes = wga.shortestPath(src, startEdge);
-        listNodes.add(g.getNode(better.get_edge().getDest()));
-
-
-        if (listNodes.size() > 1) {
-            ans = listNodes.get(1).getKey();
-        } else {
-            ans = listNodes.get(0).getKey();
-        }
-        return ans;
-    }
-
-
-    public static int strategy2(directed_weighted_graph g, int src) {
-        int ans = -1;
         List<Pokemon> listPokemom = _ar.getPokemons();
         Pokemon better = listPokemom.get(0);
         for (int i = 0; i < listPokemom.size(); i++) {
             Arena.updateEdge(listPokemom.get(i), g);
         }
 
-        dw_graph_algorithms wga = new DWGraph_Algo();
-        wga.init(g);
-
         for (int i = 0; i < listPokemom.size(); i++) {
-            if (wga.shortestPathDist(src, listPokemom.get(i).get_edge().getSrc())
-                    <= wga.shortestPathDist(src, better.get_edge().getSrc())) {
+            double path2index = wga.shortestPathDist(src, listPokemom.get(i).get_edge().getSrc());
+            double path2better = wga.shortestPathDist(src, better.get_edge().getSrc());
+            geo_location pos = listPokemom.get(i).getLocation();
+//            if ((path2index <= path2better) && !checkTarget(ag)){
+            if ((path2index <= path2better)){
                 better = listPokemom.get(i);
+//                ag.setTarget(pos);
             }
         }
 
@@ -228,7 +236,9 @@ public class MainGame implements Runnable {
         List<node_data> listNodes = wga.shortestPath(src, startEdge);
         listNodes.add(g.getNode(better.get_edge().getDest()));
 
-
+        if(listNodes.size() == 2){
+            dt = 50;
+        }
         if (listNodes.size() > 1) {
             ans = listNodes.get(1).getKey();
         } else {
@@ -237,46 +247,45 @@ public class MainGame implements Runnable {
         return ans;
     }
 
-    //Eats pokemon by the best value(high score)
-    private static int strategy1(directed_weighted_graph g, int src) {
-        int ans = -1;
-        List<Pokemon> listPokemom = _ar.getPokemons();
-        Pokemon better = listPokemom.get(0);
+//    //Eats pokemon by the best value(high score)
+//    private static int strategy1(directed_weighted_graph g, int src) {
+//        int ans = -1;
+//        dw_graph_algorithms wga = new DWGraph_Algo();
+//        wga.init(g);
+//
+//        List<Pokemon> listPokemom = _ar.getPokemons();
+//        Pokemon better = listPokemom.get(0);
+//        for (int i = 0; i < listPokemom.size(); i++) {
+//            Arena.updateEdge(listPokemom.get(i), g);
+//        }
+//
+//        for (int i = 0; i < listPokemom.size(); i++) {
+//            if ((listPokemom.get(i).getValue() > better.getValue())) {
+//                better = listPokemom.get(i);
+//            }
+//        }
+//        int startEdge = better.get_edge().getSrc();
+//        List<node_data> listNodes = wga.shortestPath(src, startEdge);
+//        listNodes.add(g.getNode(better.get_edge().getDest()));
+//
+//
+//        if (listNodes.size() > 1) {
+//            ans = listNodes.get(1).getKey();
+//        } else {
+//            ans = listNodes.get(0).getKey();
+//        }
+//        return ans;
+//    }
 
-        dw_graph_algorithms wga = new DWGraph_Algo();
-        wga.init(g);
 
-        for (int i = 0; i < listPokemom.size(); i++) {
-            Arena.updateEdge(listPokemom.get(i), g);
-        }
-
-        for (int i = 0; i < listPokemom.size(); i++) {
-            if ((listPokemom.get(i).getValue() > better.getValue())) {
-                better = listPokemom.get(i);
-            }
-        }
-        int startEdge = better.get_edge().getSrc();
-        List<node_data> listNodes = wga.shortestPath(src, startEdge);
-        listNodes.add(g.getNode(better.get_edge().getDest()));
-
-
-        if (listNodes.size() > 1) {
-            ans = listNodes.get(1).getKey();
-        } else {
-            ans = listNodes.get(0).getKey();
-        }
-        return ans;
-    }
-
-
-    private void init(game_service game,directed_weighted_graph graph) {
+    private void init(game_service game, directed_weighted_graph graph) {
 
         ArrayList<Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
         for (int a = 0; a < pokemonList.size(); a++) {
             Arena.updateEdge(pokemonList.get(a), graph);
         }
 
-        initArena(graph,pokemonList);
+        initArena(graph, pokemonList);
         createGUI(game);
 
         //Init position of agents
@@ -287,7 +296,7 @@ public class MainGame implements Runnable {
             JSONObject gameObject = line.getJSONObject("GameServer");
             int numOfAgents = gameObject.getInt("agents");
 
-            for (int i = 0; i < numOfAgents ; i++) {
+            for (int i = 0; i < numOfAgents; i++) {
                 Pokemon c = pokemonList.get(i);
                 int nn = c.get_edge().getSrc();
                 game.addAgent(nn);
