@@ -1,5 +1,7 @@
-package api;
+package Classes;
 
+import api.geo_location;
+import api.node_data;
 import gameClient.util.Point3D;
 
 public class NodeData implements node_data {
