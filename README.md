@@ -1,5 +1,6 @@
-# Pokemon_Game<br>
 
+                          <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">" width="50" height="50">
+                          
 This project is about the Pokemons game<br>
 that built of 2 parts:<br>
 >* In the first part:<br>
