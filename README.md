@@ -22,9 +22,11 @@ is made up of eight classe<br>
 Class representing an agent in a graph for each agent Multiple fields:.<br>
 EPS, Count, _Seed, _Hand, _Pos, _Speed, _Sedge_Course, _Shoot_Course, _gg ,_Fruit_Course, _Sg_DT,.<br>
 This class advises a number of actions that can be performed on an agent such as:.<br>
-builds, get and set actions for the class fields, update - gets json file and updates the agents in the graph, toJson - converts the agents to json file
-setNectNode- Defines the next node for the agent.
-getNextNode- Returns the node to which the agent is intended
+builds, get and set actions for the class fields,<br>
+update - gets json file and updates the agents in the graph<br> 
+toJson - converts the agents to json file<br>
+setNectNode- Defines the next node for the agent.<br>
+getNextNode- Returns the node to which the agent is intended<br>
 set_SDT- Defines the time it will take for the agent to move from the node he is on to the Pokemon.<br>
 And more.
 
@@ -37,6 +39,10 @@ init- Initializes the game.
 getAgent- Returns the agents that belong to the phase.
 json2Pokemons- Gets a string of Pokemon and returns a list containing them.
 updateEdge- Updates the locations of Pokemon to edges.<br>
+isOnEdge-<br>
+isOnEdge-<br>
+isOnEdge-<br>
+GraphRange-<br>
 and more.
 
 **Ex2 class:**<br>
