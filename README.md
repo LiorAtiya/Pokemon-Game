@@ -39,31 +39,31 @@ In this class you can perform operations on a node in a graph such as a
  constructor and get and set operations on the node fields.
 
  *DWGraph_DS class:*<br>
-This implementation directed_weighted_graph
+This implementation directed_weighted_graph<br>
 A graph is made up of a <br>
-Vertices, Neighbors, countMC and edgeSize.
-In this class there are several functions that can be done in the graph such as:
- constructor, add node, delete node and edge, make a connection between 2 nodes, get a collection of all the node and neighbors and more.
-And operations that can be performed in edge: constructor and get and set operations to edge fields that are src, des, weight, info, tag.
+Vertices, Neighbors, countMC and edgeSize.<br>
+In this class there are several functions that can be done in the graph such as:<br>
+ constructor, add node, delete node and edge, make a connection between 2 nodes, get a collection of all the node and neighbors and more.<br>
+And operations that can be performed in edge: constructor and get and set operations to edge fields that are src, des, weight, info, tag.<br>
 
  *Graph_Algo class:*<br>
-This implementation dw_graph_algorithms
+This implementation dw_graph_algorithms<br>
 This class represents a number of algorithms that can be made on a graph<br>
-Such as: init- creates a pointer to the graph.
-copy- creates a copy of the graph by deep copying.
-isConnected- checks whether the graph is linked.
-shortestPathDist- Returns the length of the shortest path.
-shortestPath- Returns a list of nodes in the shortest path.
-save and load- Save and load the graph.
-Dijkstra - an algorithm for finding the shortest route.
-BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.
+Such as: init- creates a pointer to the graph.<br>
+copy- creates a copy of the graph by deep copying.<br>
+isConnected- checks whether the graph is linked.<br>
+shortestPathDist- Returns the length of the shortest path.<br>
+shortestPath- Returns a list of nodes in the shortest path.<br>
+save and load- Save and load the graph.<br>
+Dijkstra - an algorithm for finding the shortest route.<br>
+BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.<br>
 
-Point3D class
-This implementation geo_location
-that represents a geo location <x,y,z>.
-In this class the number of functions that can be performed in a location.
+*Point3D class:*<br>
+This implementation geo_location<br>
+that represents a geo location <x,y,z>.<br>
+In this class the number of functions that can be performed in a location.<br>
 
 **Data Structure:**<br>
-HashMap-It is used because it allows you to get data based on key in O(1).
-ArrayList-Because it has the ability to create a list in the desired order.
-PriorityQueue-Because it has the ability to adjust the position of the object by definition.
+HashMap-It is used because it allows you to get data based on key in O(1).<br>
+ArrayList-Because it has the ability to create a list in the desired order.<br>
+PriorityQueue-Because it has the ability to adjust the position of the object by definition.<br>
