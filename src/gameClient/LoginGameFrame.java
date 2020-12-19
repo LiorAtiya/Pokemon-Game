@@ -1,32 +1,47 @@
 package gameClient;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class LoginGameFrame extends JFrame implements ActionListener {
 
 //    private static JComboBox chooseField;
 
     public LoginGameFrame() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("data/pictures/agent.png"));
+        initBackgroundImage();
         initLoginGame();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void initBackgroundImage() {
+        try {
+            this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("data/pictures/login.jpg")))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.pack();
+        windowCenter();
     }
 
     private void initLoginGame() {
 
         JLabel id = new JLabel();
         id.setText("ID :");
-        id.setBounds(80, 13, 100, 100);
+        id.setBounds(85, 120, 100, 100);
         JTextField textfieldID = new JTextField();
-        textfieldID.setBounds(110, 50, 130, 30);
+        textfieldID.setBounds(110, 155, 130, 30);
 
         JLabel choose = new JLabel();
         choose.setText("Choose level :");
-        choose.setBounds(20, 63, 100, 100);
+        choose.setBounds(20, 170, 100, 100);
         JTextField textfieldLevel = new JTextField();
-        textfieldLevel.setBounds(110, 100, 130, 30);
+        textfieldLevel.setBounds(110, 205, 130, 30);
 //        String[] levels = new String[24];
 //        for (int i = 0; i < levels.length; i++) {
 //            levels[i] = "" + i;
@@ -36,17 +51,16 @@ public class LoginGameFrame extends JFrame implements ActionListener {
 //        chooseField.setBounds(110, 100, 130, 30);
 
         JButton buttonStart = new JButton("Start");
-        buttonStart.setBounds(75, 170, 140, 40);
+        buttonStart.setBounds(90, 270, 90, 30);
 
         this.add(id);
         this.add(textfieldID);
         this.add(choose);
         this.add(textfieldLevel);
         this.add(buttonStart);
-        this.setSize(300, 300);
+        this.setSize(280, 470);
         this.setLayout(null);
         this.setVisible(true);
-        windowCenter();
 
         buttonStart.addActionListener(new ActionListener() {
             @Override
@@ -59,7 +73,7 @@ public class LoginGameFrame extends JFrame implements ActionListener {
                 } else {
                     int level = Integer.parseInt(sLevel);
                     int id = Integer.parseInt(sID);
-                    Thread client = new Thread(new MainGame(id,level));
+                    Thread client = new Thread(new MainGame(id, level));
                     client.start();
                 }
                 dispose();

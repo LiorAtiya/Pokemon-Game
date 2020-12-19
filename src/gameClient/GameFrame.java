@@ -1,5 +1,6 @@
 package gameClient;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class represents a very simple GUI class to present a
@@ -17,7 +18,7 @@ public class GameFrame extends JFrame{
 	}
 
 	private void initFrame(){
-		this.pack();
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("data/pictures/agent.png"));
 		this.setSize(1000,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

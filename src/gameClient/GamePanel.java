@@ -89,7 +89,7 @@ public class GamePanel extends JPanel {
 
             Point3D c = currentPok.getLocation();
             geo_location fp = this._w2f.world2frame(c);
-            g.drawImage(importImage("data/pictures/" + currentPok.getID() + ".png"), (int) fp.x() - 17, (int) fp.y() - 17, 32, 32, this);
+            g.drawImage(importImage("data/pictures/" + currentPok.getID() + ".png"), (int) fp.x() - 17, (int) fp.y() - 17, 35, 35, this);
         }
     }
 
