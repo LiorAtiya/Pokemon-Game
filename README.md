@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://switchplayer.net/wp-content/uploads/2017/06/pokemon-820x461.png" width="800" height="400">
+<img src="https://img.r7.com/images/pokemon-17082020172224817?dimensions=660x360&&amp;&amp;&amp;resize=660x360&amp;crop=771x421+191+0" width="1000" height="400">
 </p>    
 
 **This project is about the Pokemons game**
