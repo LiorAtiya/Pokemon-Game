@@ -54,17 +54,21 @@ In this class the main is defined through which the game can be run.
 This class defines the GUI of the game.<br>
 Class variables: _ ar, _w2f.<br>
 This class defines the GUI interface of the interface using the following functions:<br>
-paintComponent- Builder for the game window.
-importImage-
-drawHeader- Defines the text that appears in the game window.
-updateFrame-
-drawGraph- receives the game graph and displays it.
-drawPokemons- Displays the Pokemon according to the stage.
-drawAgants- Displays the agents according to the stage.
-drawNode- Displays the graph nodes.
+paintComponent- Builder for the game window.<br>
+importImage-<br>
+drawHeader- Defines the text that appears in the game window.<br>
+updateFrame-<br>
+drawGraph- receives the game graph and displays it.<br>
+drawPokemons- Displays the Pokemon according to the stage.<br>
+drawAgants- Displays the agents according to the stage.<br>
+drawNode- Displays the graph nodes.<br>
 drawEdge- Displays the nodes in the graph.
 
 **LoginGameFrame class:**<br>
+This class defines the game login window using the following functions:<br>
+LoginGameFrame- A method that defines the graphical parts of the login window such as type, button text box and more.<br>
+initLoginGame-<br>
+windowCenter - places the login screen in the middle of the screen.<br>
 
 **MainGame class:**<br>
 
