@@ -34,13 +34,13 @@ The first part:
 ---------------
 
 is made up of four classe<br>
- *NodeData class:*<br>
+**NodeData class:**<br>
 This implements node_data node in a graph consists of a<br>
 info, tag, location and weight.
 In this class you can perform operations on a node in a graph such as a
  constructor and get and set operations on the node fields.
 
- *DWGraph_DS class:*<br>
+**DWGraph_DS class:**<br>
 This implementation directed_weighted_graph<br>
 A graph is made up of a <br>
 Vertices, Neighbors, countMC and edgeSize.<br>
@@ -48,7 +48,7 @@ In this class there are several functions that can be done in the graph such as:
  constructor, add node, delete node and edge, make a connection between 2 nodes, get a collection of all the node and neighbors and more.<br>
 And operations that can be performed in edge: constructor and get and set operations to edge fields that are src, des, weight, info, tag.<br>
 
- *Graph_Algo class:*<br>
+**Graph_Algo class:**<br>
 This implementation dw_graph_algorithms<br>
 This class represents a number of algorithms that can be made on a graph<br>
 Such as: init- creates a pointer to the graph.<br>
@@ -60,7 +60,7 @@ save and load- Save and load the graph.<br>
 Dijkstra - an algorithm for finding the shortest route.<br>
 BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.<br>
 
-*Point3D class:*<br>
+**Point3D class:**<br>
 This implementation geo_location<br>
 that represents a geo location <x,y,z>.<br>
 In this class the number of functions that can be performed in a location.<br>
