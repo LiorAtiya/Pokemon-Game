@@ -13,7 +13,6 @@ And the second part: <br>
 Engaged in creating the Pokemon game from building the game itself graphics, actions performed in the game, placing the agents and building a victory strategy.<br>
 
 
-**Introduction:**<br>
 
 ## The second part:Pokemon game.
 
