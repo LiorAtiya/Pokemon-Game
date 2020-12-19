@@ -33,7 +33,7 @@ When a situation arises where an agent in a game is stuck at the edge we will ma
 The first part:
 ---------------
 
-is made up of four classes-<br>
+is made up of four classe<br>
  *NodeData class:*<br>
 This implements node_data node in a graph consists of a<br>
 info, tag, location and weight.
