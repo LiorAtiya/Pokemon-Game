@@ -1,5 +1,5 @@
-Pokemon_game
-<img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">
+ 
+<img src="https://switchplayer.net/wp-content/uploads/2017/06/pokemon-820x461.png" width="200" height="70">
                           
 This project is about the Pokemons game<br>
 that built of 2 parts:<br>
