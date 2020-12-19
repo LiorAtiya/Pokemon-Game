@@ -19,8 +19,8 @@ The second part: Pokemon game.
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
 The game is built from:<br>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">    Game board - a graph is displayed according to the stage.<br>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">     Pokemon - Pokemon that are on the graph by eating get a score.<br>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">    * Game board *- a graph is displayed according to the stage.<br>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">    * Pokemon *- Pokemon that are on the graph by eating get a score.<br>
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">     Agents - The players who run on the graph and eat the Pokemon.<br>
 
 For each stage of the game: a set time, a suitable graph and a different number of Pokemon and agents.<br>
