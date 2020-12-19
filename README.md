@@ -31,7 +31,7 @@ This is how the shortest route to each Pokemon in the game to which the agent is
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
 The game can be played from:
-![alt text]<img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="100" height="100"> ![alt text]<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="100" height="100"> 
+<img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="100" height="100"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="100" height="100"> 
 
 
 The first part:
