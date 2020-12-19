@@ -34,7 +34,7 @@ The first part:
 ---------------
 
 is made up of four classe<br>
-<dt>NodeData class:</dt>
+**NodeData class:**
 This implements node_data node in a graph consists of a<br>
 info, tag, location and weight.
 In this class you can perform operations on a node in a graph such as a
