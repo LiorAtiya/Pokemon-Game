@@ -1,6 +1,4 @@
-# Pokemon_Game
-
-ex2 Readme
+# Pokemon_Game<br>
 
 This project is about the Pokemons game<br>
 that built of 2 parts:<br>
@@ -31,7 +29,7 @@ Which uses the shortestPath function - which returns a list of nodes of the shor
 This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
-### The first part:<br>
+### The first part:
 ---------------
 
 is made up of four classes-<br>
