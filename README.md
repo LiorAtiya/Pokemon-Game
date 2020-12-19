@@ -1,8 +1,8 @@
 <p align="center">
 <img src="https://switchplayer.net/wp-content/uploads/2017/06/pokemon-820x461.png" width="800" height="400">
-</p>                          
-**This project is about the Pokemons game**
+</p>    
 
+**This project is about the Pokemons game**
 that built of 2 parts:<br>
 >* In the first part:<br>
 >deals with the construction of directional weighted graphstarting from the creation of the nodes and edges in the graph,<br>
