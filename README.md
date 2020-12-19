@@ -1,5 +1,5 @@
  
-<div style="text-align:center">   <img src="https://switchplayer.net/wp-content/uploads/2017/06/pokemon-820x461.png" width="400" height="200"></div>
+<div style="text-align:center"><img src="https://switchplayer.net/wp-content/uploads/2017/06/pokemon-820x461.png" width="400" height="200">
                           
 This project is about the Pokemons game<br>
 that built of 2 parts:<br>
