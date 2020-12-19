@@ -16,7 +16,7 @@ that built of 2 parts:<br>
 
 The second part: Pokemon game
 ---------------
-is made up of four classe<br>
+is made up of eight classe<br>
 
 **Agent class:**<br>
 
