@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://img.r7.com/images/pokemon-17082020172224817?dimensions=660x360&&amp;&amp;&amp;resize=660x360&amp;crop=771x421+191+0" width="1200" height="500">
+<img src="https://img.r7.com/images/pokemon-17082020172224817?dimensions=660x360&&amp;&amp;&amp;resize=660x360&amp;crop=771x421+191+0" width="1100" height="500">
 </p>    
 
 **This project is about the Pokemons game**
