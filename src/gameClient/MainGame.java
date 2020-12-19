@@ -286,7 +286,7 @@ public class MainGame implements Runnable {
         }
 
         initArena(graph, pokemonList);
-        createGUI(game);
+        createGUI();
 
         //Init position of agents
         try {
@@ -318,7 +318,7 @@ public class MainGame implements Runnable {
         this._ar.setPokemons(p);
     }
 
-    public void createGUI(game_service game) {
+    public void createGUI() {
         _win = new GameFrame("test Ex2", _ar);
         _win.setVisible(true);
     }
