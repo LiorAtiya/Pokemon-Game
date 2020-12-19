@@ -17,21 +17,22 @@ Engaged in creating the Pokemon game from building the game itself graphics, act
 
 The second part:Pokemon game.
 
-Goal of the game: Collect as many Pokemon as possible.
-The game has 23 different stages.
-The game is built from:
-Game board - a graph is displayed according to the stage.
-Pokemon - Pokemon that are on the graph by eating get a score.
-Agents - The players who run on the graph and eat the Pokemon.
-For each stage of the game: a set time, a suitable graph, and a different number of Pokemon and agents.
+Goal of the game: Collect as many Pokemon as possible.<br>
+The game has 23 different stages.<br>
+The game is built from:<br>
+Game board - a graph is displayed according to the stage.<br>
+Pokemon - Pokemon that are on the graph by eating get a score.<br>
+Agents - The players who run on the graph and eat the Pokemon.<br>
+For each stage of the game: a set time, a suitable graph, and a different number of Pokemon and agents.<br>
 The more Pokemon you collect with the help of the agents, the higher the score, depending on the specific value of the Pokemon.
 In order to reach the maximum score, a victory strategy was built in the department: MainGame
 Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
 This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
-The first part is made up of four classes:
+The first part"<br>
 
+is made up of four classes-<br>
  *NodeData class:*<br>
 This implements node_data node in a graph consists of a<br>
 info, tag, location and weight.
