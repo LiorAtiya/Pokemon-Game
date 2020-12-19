@@ -14,7 +14,7 @@ that built of 2 parts:<br>
 
 
 
-The second part: Pokemon game.
+The second part: Pokemon game
 ---------------
 
 Goal of the game: Collect as many Pokemon as possible.<br>
