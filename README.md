@@ -4,7 +4,7 @@ ex2 Readme
 
 This project is about the Pokemons game<br>
 that built of 2 parts:<br><br>
-In the first part:<br>
+In the first part:
 deals with the construction of directional weighted graphstarting from the creation of the nodes and edges in the graph,<br>
 continues with the creation of the graph itself (such as connecting the nodes in the graph and more) and basic algorithms related to the graph<br>
 ( paths in the parent link graph and more).<br>
