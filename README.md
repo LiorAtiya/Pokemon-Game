@@ -22,7 +22,7 @@ The game is built from:<br>
 * Pokemon - Pokemon that are on the graph by eating get a score.<br>
 * Agents - The players who run on the graph and eat the Pokemon.<br>
 
-For each stage of the game: a set time, a suitable graph, and a different number of Pokemon and agents.<br>
+For each stage of the game: a set time, a suitable graph and a different number of Pokemon and agents.<br>
 
 The more Pokemon you collect with the help of the agents, the higher the score, depending on the specific value of the Pokemon.
 In order to reach the maximum score, a victory strategy was built in the department: MainGame
