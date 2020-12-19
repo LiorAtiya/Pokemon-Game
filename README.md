@@ -29,6 +29,15 @@ set_SDT- Defines the time it will take for the agent to move from the node he is
 And more.
 
 **Arena class:**<br>
+This class represents the data of each stage of the game<br>
+Allows you to get and configure data for the game<br>
+The class is made up of the fields: EPS1, _gg, _agents, _pokemons, _info, timer, MIN, MAX.<br>
+In this class you can perform a number of operations on the game such as: get and set operations for the class variables,
+init- Initializes the game.
+getAgent- Returns the agents that belong to the phase.
+json2Pokemons- Gets a string of Pokemon and returns a list containing them.
+updateEdge- Updates the locations of Pokemon to edges.<br>
+and more.
 
 **Ex2 class:**<br>
 
