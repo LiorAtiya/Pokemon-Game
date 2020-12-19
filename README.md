@@ -18,7 +18,7 @@ The second part: Pokemon game.
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
 The game is built from:<br>
-** Game board - a graph is displayed according to the stage.<br>
+* Game board - a graph is displayed according to the stage.<br>
 * Pokemon - Pokemon that are on the graph by eating get a score.<br>
 * Agents - The players who run on the graph and eat the Pokemon.<br>
 For each stage of the game: a set time, a suitable graph, and a different number of Pokemon and agents.<br>
