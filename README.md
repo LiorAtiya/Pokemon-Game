@@ -15,7 +15,7 @@ Engaged in creating the Pokemon game from building the game itself graphics, act
 
 
 The second part: Pokemon game.
------------------------
+==
 
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
