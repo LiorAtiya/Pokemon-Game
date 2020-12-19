@@ -19,6 +19,12 @@ The second part: Pokemon game
 is made up of eight classe<br>
 
 **Agent class:**<br>
+Class representing an agent in a graph for each agent Multiple fields: EPS, Count, _Seed, _Hand, _Pos, _Speed, _Sedge_Course, _Shoot_Course, _gg ,_Fruit_Course, _Sg_DT,
+This class advises a number of actions that can be performed on an agent such as: builds, get and set actions for the class fields, update - gets json file and updates the agents in the graph, toJson - converts the agents to json file
+setNectNode- Defines the next node for the agent.
+getNextNode- Returns the node to which the agent is intended
+set_SDT- Defines the time it will take for the agent to move from the node he is on to the Pokemon
+And more.
 
 **Arena class:**<br>
 
