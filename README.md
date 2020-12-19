@@ -16,6 +16,24 @@ that built of 2 parts:<br>
 
 The second part: Pokemon game
 ---------------
+is made up of four classe<br>
+
+**Agent class:**<br>
+
+**Arena class:**<br>
+
+**Ex2 class:**<br>
+
+**GameFrame class:**<br>
+
+**GamePanel class:**<br>
+
+**LoginGameFrame class:**<br>
+
+**MainGame class:**<br>
+
+**Pokemon class:**<br>
+
 
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
