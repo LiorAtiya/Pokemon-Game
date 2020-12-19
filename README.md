@@ -15,7 +15,7 @@ Engaged in creating the Pokemon game from building the game itself graphics, act
 
 
 The second part: Pokemon game.
-=====================
+---------------
 
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
@@ -32,6 +32,7 @@ This is how the shortest route to each Pokemon in the game to which the agent is
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
 ### The first part:<br>
+---------------
 
 is made up of four classes-<br>
  *NodeData class:*<br>
