@@ -40,10 +40,23 @@ updateEdge- Updates the locations of Pokemon to edges.<br>
 and more.
 
 **Ex2 class:**<br>
+In this class the main is defined through which the game can be run.
 
 **GameFrame class:**<br>
 
 **GamePanel class:**<br>
+This class defines the GUI of the game.<br>
+Class variables: _ ar, _w2f.<br>
+This class defines the GUI interface of the interface using the following functions:<br>
+paintComponent- Builder for the game window.
+importImage-
+drawHeader- Defines the text that appears in the game window.
+updateFrame-
+drawGraph- receives the game graph and displays it.
+drawPokemons- Displays the Pokemon according to the stage.
+drawAgants- Displays the agents according to the stage.
+drawNode- Displays the graph nodes.
+drawEdge- Displays the nodes in the graph.
 
 **LoginGameFrame class:**<br>
 
