@@ -78,7 +78,7 @@ public class SimpleMainGameTest {
 
         //Create game
         game_service game = Game_Server_Ex2.getServer(num); // you have [0,23] games
-//        game.login(this.id);
+        game.login(315814475);
 
         //Load graph
         dw_graph_algorithms algoGraph = new DWGraph_Algo();
