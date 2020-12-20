@@ -146,6 +146,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 <img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="700" height="400">
 </p>    
 
+*In the table you can see the game results we achieved for each stage
 
 | Level | Grade | moves | Level | Grade | moves |
 | :---: | :---: | :---: | :---: | :---: | :---: |
