@@ -140,6 +140,8 @@ In this class you can do various actions on Pokemon such as: get and set actions
 >This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
 >When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
+![Alt Text](https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif)
+
 The game can be played from:
 <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="50" height="50"> 
 <img src="https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg" width="50" height="50" background="white">  
