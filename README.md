@@ -168,5 +168,4 @@ The game can be played from:
 <p align="center">
  
 **Author** @Shilo Elimelech @Lior Atiya
-
 </p> 
