@@ -143,7 +143,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 *For more information on the game visit* **Wiki**
 
 <p align="center">
-<img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="500" height="300">
+<img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="700" height="500">
 </p>    
 
 <p align="center">
