@@ -144,6 +144,8 @@ In this class you can do various actions on Pokemon such as: get and set actions
 <img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="500" height="300">
 </p>    
 
+<p align="center">
 The game can be played from:
 <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="50" height="50"> 
 <img src="https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg" width="50" height="50" background="white">  
+ </p>    
