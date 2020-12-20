@@ -143,8 +143,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 *For more information on the game visit* **Wiki**
 
 <p align="center">
-<img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="700" height="400">
-</p>    
+<img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="700" height="400">   
 
 **In the table you can see the game results we achieved for each stage**
 
@@ -163,7 +162,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 |  10   |  511  |  530  |  22   |  248  |  270  |
 |  11   | 1523  |  587  |  23   |  507  |  593  |
 
-
+</p>
 
 
 
