@@ -4,9 +4,9 @@
 </p>    
 
 <h2>Description</h2>
-that built of 2 parts:<br>
 
->* firrst part:<br>
+
+>* First part:<br>
 >deals with the construction of directional weighted graphstarting from the creation of the nodes and edges in the graph,<br>
 >continues with the creation of the graph itself (such as connecting the nodes in the graph and more) and basic algorithms related to the graph
 >(paths in the parent link graph and more).
@@ -15,10 +15,10 @@ that built of 2 parts:<br>
 >Engaged in creating the Pokemon game from building the game itself graphics, actions performed in the game, placing the agents and building a victory strategy.<br>
 
 
-The first part:
+First part:
 ---------------
 
-is made up of four classe<br>
+is made up of 4 classes<br>
 **NodeData class:**
 This implements node_data node in a graph consists of a<br>
 info, tag, location and weight.
@@ -53,9 +53,9 @@ ArrayList-Because it has the ability to create a list in the desired order.<br>
 PriorityQueue-Because it has the ability to adjust the position of the object by definition.<br>
 
 
-The second part: Pokemon game <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">
+Second part: Pokemon game <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">
 ---------------
-is made up of eight classe<br>
+is made up of 8 classes<br>
 
 **Agent class:**<br>
 Class representing an agent in a graph for each agent Multiple fields:.<br>
