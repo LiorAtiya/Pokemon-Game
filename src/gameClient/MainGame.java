@@ -63,7 +63,7 @@ public class MainGame implements Runnable {
                 }
                 if (maxAg.getSpeed() == 1.0) dt = 120;
                 else if (maxAg.getSpeed() == 2.0) dt = 110;
-                else if (maxAg.getSpeed() == 5.0) dt = 100;
+                else if (maxAg.getSpeed() == 5.0) dt = 90;
                 Thread.sleep(dt);
 
             } catch (Exception e) {
@@ -113,16 +113,92 @@ public class MainGame implements Runnable {
         }
     }
 
-    /**
-     * a very simple random walk implementation!
-     *
-     * @param g
-     * @param src
-     * @return
-     */
+
     private static int nextNode(directed_weighted_graph g, int src, Agent ag) {
         int ans = strategy2(g, src, ag);
         return ans;
+    }
+
+    public static int strategy2(directed_weighted_graph g, int src, Agent ag) {
+        int ans;
+        dw_graph_algorithms wga = new DWGraph_Algo();
+        wga.init(g);
+
+        List<Pokemon> listPokemom = _ar.getPokemons();
+        Pokemon better = listPokemom.get(0);
+        for (int i = 0; i < listPokemom.size(); i++) {
+            Arena.updateEdge(listPokemom.get(i), g);
+        }
+
+        for (int i = 0; i < listPokemom.size(); i++) {
+            double path2index = wga.shortestPathDist(src, listPokemom.get(i).get_edge().getSrc());
+            double path2better = wga.shortestPathDist(src, better.get_edge().getSrc());
+            geo_location pos = listPokemom.get(i).getLocation();
+//            if ((path2index <= path2better) && !checkTarget(ag)){
+            if ((path2index <= path2better)){
+                better = listPokemom.get(i);
+//                ag.setTarget(pos);
+            }
+        }
+
+        int startEdge = better.get_edge().getSrc();
+        List<node_data> listNodes = wga.shortestPath(src, startEdge);
+        listNodes.add(g.getNode(better.get_edge().getDest()));
+
+        if(listNodes.size() == 2){
+            dt = 20;
+        }
+        if (listNodes.size() > 1) {
+            ans = listNodes.get(1).getKey();
+        } else {
+            ans = listNodes.get(0).getKey();
+        }
+        return ans;
+    }
+
+    private void init(game_service game, directed_weighted_graph graph) {
+
+        ArrayList<Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
+        for (int a = 0; a < pokemonList.size(); a++) {
+            Arena.updateEdge(pokemonList.get(a), graph);
+        }
+
+        initArena(graph, pokemonList);
+        createGUI();
+
+        //Init position of agents
+        try {
+            String info = game.toString();
+            JSONObject line;
+            line = new JSONObject(info);
+            JSONObject gameObject = line.getJSONObject("GameServer");
+            int numOfAgents = gameObject.getInt("agents");
+
+            for (int i = 0; i < numOfAgents; i++) {
+                Pokemon c = pokemonList.get(i);
+                int nn = c.get_edge().getSrc();
+                game.addAgent(nn);
+            }
+
+            //Print detail of game
+            System.out.println(info);
+            System.out.println(game.getPokemons());
+            System.out.println(game.getAgents());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initArena(directed_weighted_graph g, List<Pokemon> p) {
+        this._ar = new Arena();
+        this._ar.setGraph(g);
+        this._ar.setPokemons(p);
+    }
+
+    public void createGUI() {
+        _win = new GameFrame("test Ex2", _ar);
+        _win.setVisible(true);
     }
 
 //    private static PriorityQueue<Pokemon> pQueue = new PriorityQueue<>();
@@ -210,43 +286,6 @@ public class MainGame implements Runnable {
 //        return true;
 //    }
 
-    public static int strategy2(directed_weighted_graph g, int src, Agent ag) {
-        int ans;
-        dw_graph_algorithms wga = new DWGraph_Algo();
-        wga.init(g);
-
-        List<Pokemon> listPokemom = _ar.getPokemons();
-        Pokemon better = listPokemom.get(0);
-        for (int i = 0; i < listPokemom.size(); i++) {
-            Arena.updateEdge(listPokemom.get(i), g);
-        }
-
-        for (int i = 0; i < listPokemom.size(); i++) {
-            double path2index = wga.shortestPathDist(src, listPokemom.get(i).get_edge().getSrc());
-            double path2better = wga.shortestPathDist(src, better.get_edge().getSrc());
-            geo_location pos = listPokemom.get(i).getLocation();
-//            if ((path2index <= path2better) && !checkTarget(ag)){
-            if ((path2index <= path2better)){
-                better = listPokemom.get(i);
-//                ag.setTarget(pos);
-            }
-        }
-
-        int startEdge = better.get_edge().getSrc();
-        List<node_data> listNodes = wga.shortestPath(src, startEdge);
-        listNodes.add(g.getNode(better.get_edge().getDest()));
-
-        if(listNodes.size() == 2){
-            dt = 50;
-        }
-        if (listNodes.size() > 1) {
-            ans = listNodes.get(1).getKey();
-        } else {
-            ans = listNodes.get(0).getKey();
-        }
-        return ans;
-    }
-
 //    //Eats pokemon by the best value(high score)
 //    private static int strategy1(directed_weighted_graph g, int src) {
 //        int ans = -1;
@@ -277,50 +316,5 @@ public class MainGame implements Runnable {
 //        return ans;
 //    }
 
-
-    private void init(game_service game, directed_weighted_graph graph) {
-
-        ArrayList<Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
-        for (int a = 0; a < pokemonList.size(); a++) {
-            Arena.updateEdge(pokemonList.get(a), graph);
-        }
-
-        initArena(graph, pokemonList);
-        createGUI();
-
-        //Init position of agents
-        try {
-            String info = game.toString();
-            JSONObject line;
-            line = new JSONObject(info);
-            JSONObject gameObject = line.getJSONObject("GameServer");
-            int numOfAgents = gameObject.getInt("agents");
-
-            for (int i = 0; i < numOfAgents; i++) {
-                Pokemon c = pokemonList.get(i);
-                int nn = c.get_edge().getSrc();
-                game.addAgent(nn);
-            }
-
-            //Print detail of game
-            System.out.println(info);
-            System.out.println(game.getPokemons());
-            System.out.println(game.getAgents());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void initArena(directed_weighted_graph g, List<Pokemon> p) {
-        this._ar = new Arena();
-        this._ar.setGraph(g);
-        this._ar.setPokemons(p);
-    }
-
-    public void createGUI() {
-        _win = new GameFrame("test Ex2", _ar);
-        _win.setVisible(true);
-    }
 }
 
