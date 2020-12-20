@@ -148,6 +148,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 
 
 | Level | Grade | moves |
+| :---: | :---: | :---: |
 |   0   |  147  |  241  |
 |   1   |  578  |  517  |
 |   2   |  269  |  248  |
