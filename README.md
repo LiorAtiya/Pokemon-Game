@@ -133,8 +133,8 @@ This class defines pokemon<br>
 Class fields: _edge, _value, _type, _pos, min_dist, min_ro, id.<br>
 In this class you can do various actions on Pokemon such as: get and set actions for the class variables, builder, and more.
 
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">Goal of the game: Collect as many Pokemon as possible.<br>
+*
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">  **Goal of the game:** Collect as many Pokemon as possible.<br>
 The more Pokemon you collect with the help of the agents, the higher the score, depending on the specific value of the Pokemon.
 In order to reach the maximum score, a victory strategy was built in the department: MainGame
 Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
