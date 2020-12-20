@@ -100,7 +100,6 @@ windowCenter - places the login screen in the middle of the screen.<br>
 The department where the game takes place,<br>
 Department fields: _win, _ar, scenario_num, id, dt.<br>
 The game is run using the following functions:<br>
-MainGame- Defines the id and stage number in the game.<br>
 Main functions:
 moveAgents- A function in which the move is made to each agent and a route is assigned to the agent.<br>
 strategy2- victory strategy was built in the department: MainGame
