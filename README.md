@@ -36,14 +36,11 @@ And operations that can be performed in edge: constructor and get and set operat
 **Graph_Algo class:**<br>
 This implementation dw_graph_algorithms<br>
 This class represents a number of algorithms that can be made on a graph<br>
-Such as: init- creates a pointer to the graph.<br>
-copy- creates a copy of the graph by deep copying.<br>
+Main functions:
 isConnected- checks whether the graph is linked.<br>
 shortestPathDist- Returns the length of the shortest path.<br>
 shortestPath- Returns a list of nodes in the shortest path.<br>
-save and load- Save and load the graph.<br>
-Dijkstra - an algorithm for finding the shortest route.<br>
-BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.<br>
+
 
 **Point3D class:**<br>
 This implementation geo_location<br>
@@ -65,11 +62,9 @@ Class representing an agent in a graph for each agent Multiple fields:.<br>
 EPS, Count, _Seed, _Hand, _Pos, _Speed, _Sedge_Course, _Shoot_Course, _gg ,_Fruit_Course, _Sg_DT,.<br>
 This class advises a number of actions that can be performed on an agent such as:.<br>
 builds, get and set actions for the class fields,<br>
-update - gets json file and updates the agents in the graph<br> 
-toJson - converts the agents to json file<br>
+Main functions:
 setNectNode- Defines the next node for the agent.<br>
 getNextNode- Returns the node to which the agent is intended<br>
-set_SDT- Defines the time it will take for the agent to move from the node he is on to the Pokemon.<br>
 And more.
 
 **Arena class:**<br>
@@ -77,30 +72,24 @@ This class represents the data of each stage of the game<br>
 Allows you to get and configure data for the game<br>
 The class is made up of the fields: EPS1, _gg, _agents, _pokemons, _info, timer, MIN, MAX.<br>
 In this class you can perform a number of operations on the game such as: get and set operations for the class variables,
-init- Initializes the game.
 getAgent- Returns the agents that belong to the phase.
 json2Pokemons- Gets a string of Pokemon and returns a list containing them.
 updateEdge- Updates the locations of Pokemon to edges.<br>
-GraphRange-Calculate the range of the graph by x, y.<br>
 and more.
 
 **Ex2 class:**<br>
 In this class the main is defined through which the game can be run.
 
 **GameFrame class:**<br>
+This class represents a GUI class to present game on a graph.<br>
+which contains features of the game window and the creation of
+a panel for drawing components on the frame window.<br>
 
 **GamePanel class:**<br>
-This class defines the GUI of the game.<br>
+The GamePanel class is used for drawing the components on the frame of the game<br>
+Contains: drawing information about the game, graph, Pokemon, agents, and refreshing<br>
+the components each time.<br>
 Class variables: _ ar, _w2f.<br>
-This class defines the GUI interface of the interface using the following functions:<br>
-paintComponent- Builder for the game window.<br>
-drawHeader- Defines the text that appears in the game window.<br>
-updateFrame- Refresh the drawings with each reading during the game.<br>
-drawGraph- receives the game graph and displays it.<br>
-drawPokemons- Displays the Pokemon according to the stage.<br>
-drawAgants- Displays the agents according to the stage.<br>
-drawNode- Displays the graph nodes.<br>
-drawEdge- Displays the nodes in the graph.
 
 **LoginGameFrame class:**<br>
 This class defines the game login window using the following functions:<br>
@@ -112,14 +101,12 @@ The department where the game takes place,<br>
 Department fields: _win, _ar, scenario_num, id, dt.<br>
 The game is run using the following functions:<br>
 MainGame- Defines the id and stage number in the game.<br>
-run- the function through which the game runs and calls are made to the functions that are part of the game.<br>
+Main functions:
 moveAgents- A function in which the move is made to each agent and a route is assigned to the agent.<br>
-nextNode- A function that returns the node to which the agent needs to reach according to his route.<br>
 strategy2- victory strategy was built in the department: MainGame
 Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
 This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
-init- Initialize the game - create the agents, store the game information in the Arena and create the GUI.<br>
 
 **Pokemon class:**<br>
 This class defines pokemon<br>
