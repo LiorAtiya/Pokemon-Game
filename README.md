@@ -135,5 +135,5 @@ The game can be played from:
  </p>   
  
  
-**Author** @Shilo Elimelech @Lior Atiya
+**Authors** @Shilo Elimelech @Lior Atiya
 
