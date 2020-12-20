@@ -8,20 +8,50 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * This implement dw_graph_algorithms that represents a Directed (positive) Weighted Graph Theory Algorithms including:
+ * 0. clone (); (copy)
+ * 1. init (graph);
+ * 2. isConnected (); // strongly (all ordered pais connected)
+ * 3. double shortestPathDist (int src, int dest);
+ * 4. List <node_data> shortestPath (int src, int dest);
+ * 5. Save (file); // JSON file
+ * 6. Load (file); // JSON file
+ *
+ * graph-Is an abstract representation of a set of nodes and edge,
+ * each edge has a weight,
+ * It is possible to have a route from node to another node.
+ */
+
 public class DWGraph_Algo implements dw_graph_algorithms {
 
     private directed_weighted_graph graph;
 
+    /**
+     *Init the graph on which this set of algorithms operates on.
+     * @param g
+     */
     @Override
     public void init(directed_weighted_graph g) {
         this.graph = g;
     }
 
+    /**
+     * Return the underlying graph of which this class works.
+     * @return
+     */
     @Override
     public directed_weighted_graph getGraph() {
         return this.graph;
     }
 
+    /**
+     * Compute a deep copy of this weighted graph,
+     * By going through all the nodes in the graph using an iterator.
+     * and creating a list of neighbors and sides corresponding to each node using iterator
+     * .
+     * @return Compute a deep copy of this weighted graph.
+     */
     @Override
     public directed_weighted_graph copy() {
         if (this.graph == null) return null;
@@ -45,6 +75,19 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return copy;
     }
 
+    /**
+     * Returns true if and only if (iff) there is a valid path from the EVREY node to each,
+     * by checking if there is a node in the graph
+     * that the method did not reach him from all the other nodes.
+     *
+     * The test is done by scan on all the nodes using an iterator
+     * this method checks if there is a proper route from the src to the rest of the nodes by marking
+     * all the nodes that have a suitable route from the src using the Dijkstra algorithm.
+     * Then by switching with an iterator, check if there is a node in the graph whose weight value is Double.MAX_VALUE.
+     * there is no path from all node to any nodes and the graph is not linked.
+     *
+     * @return true if the graph is linked, otherwise false.
+     */
     @Override
     public boolean isConnected() {
         if (graph.getV().isEmpty()) return true;
@@ -60,6 +103,23 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return true;
     }
 
+    /**
+     * Returns the shortest path length between src and dest
+     * by implementing a dijkstra algorithm.
+     * if there is no such path -> returns -1.
+     *
+     * The algorithm gets the start and destination value and first goes over all the nodes in the graph using an iterator
+     * and updates the tag value to Double.Max_Value.
+     * Then insert the source node into the PriorityQueue structure which allows to say priority (this priority was set
+     * by the comperator in class) and thus arrange the node with the shortest route at the top of the queue.
+     * The algorithm then passes over neighbors by using iterator of each vertex starting from src and removes
+     * from the queue the neighbor with the shortest route.
+     * Which ensures that we will not be able to reach every junction with a shorter route.
+     * Will finally return the tag value of the destination node.
+     * @param src - start node
+     * @param dest - end (target) node
+     * @return The length of the path.
+     */
     @Override
     public double shortestPathDist(int src, int dest) {
         //If it does not exist src or dest.
@@ -72,6 +132,21 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return graph.getNode(dest).getWeight();
     }
 
+    /**
+     * returns the the shortest path between src to dest - as an ordered List of nodes:
+     * src--> n1-->n2-->...dest.
+     * By pass the shortest path from the end to the beginning.
+     * If no such path exists return null.
+     * <p>
+     * The method sends the given values of src and dest to the shortestPathDist method (),
+     * and adds to the ArrayList the nodes of the corresponding path by value of info
+     * add to the list the dest and then the parent vertex (defined in the info of each node) until you reach the src.
+     * and the method will return this list.
+
+     * @param src - start node.
+     * @param dest - end (target) node.
+     * @return List<node_data>.
+     */
     @Override
     public List<node_data> shortestPath(int src, int dest) {
         //Scan the entire graph and return the number of edges of the shortest path
@@ -98,6 +173,12 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return path;
     }
 
+    /**
+     * Saves this weighted (directed) graph to the given
+     * file name - in JSON format
+     * @param file - the file name (may include a relative path).
+     * @return true - iff the file was successfully saved.
+     */
     @Override
     public boolean save(String file) {
         String json = "{\"Edges\":[";
@@ -126,6 +207,14 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         }
     }
 
+    /**
+     * This method load a graph to this graph algorithm.
+     * if the file was successfully loaded - the underlying graph
+     * of this class will be changed (to the loaded one), in case the
+     * graph was not loaded the original graph should remain "as is".
+     * @param file - file name of JSON file
+     * @return true - iff the graph was successfully loaded.
+     */
     @Override
     public boolean load(String file) {
         GsonBuilder builder = new GsonBuilder();
@@ -176,7 +265,11 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return false;
     }
 
-
+    /**
+     * Algorithm for finding the shortest path.
+     * @param g
+     * @param src
+     */
     private void Dijkstra(directed_weighted_graph g, node_data src) {
 
         PriorityQueue<node_data> pQueue = new PriorityQueue<>(new NodeComparator());
@@ -206,37 +299,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         }
     }
 
-//    private void Dijkstra(directed_weighted_graph g, node_data src) {
-//        PriorityQueue<node_data> pQueue = new PriorityQueue<>(new NodeComparator());
-//        Iterator<node_data> max = graph.getV().iterator();
-//        while (max.hasNext()) {
-//            node_data temp = max.next();
-//            temp.setWeight(Double.MAX_VALUE);
-//            temp.setInfo(null);
-//        }
-//        src.setWeight(0);
-//        pQueue.add(graph.getNode(src.getKey()));
-//
-//        while (!pQueue.isEmpty()) {
-//            node_data prev = pQueue.peek();
-//            pQueue.poll();
-//            Iterator<edge_data> neighbors = graph.getE(prev.getKey()).iterator();
-//            while (neighbors.hasNext()) {
-//                edge_data temp2 = neighbors.next();
-//
-//                node_data dest = this.graph.getNode(temp2.getDest());
-//                edge_data edgeW = graph.getEdge(prev.getKey(), temp2.getDest());
-//
-//                if (dest.getWeight() > prev.getWeight() + edgeW.getWeight()) {
-//                    dest.setWeight(prev.getWeight() + edgeW.getWeight());
-//                    pQueue.add(dest);
-//                    dest.setInfo("" + prev.getKey());
-//                }
-//
-//            }
-//        }
-//    }
-
+    /**
+     *A comparator class that compares two node_data, implemented for an algorithm Dijkstra.
+     */
     public class NodeComparator implements Comparator<node_data> {
         @Override
         public int compare(node_data o1, node_data o2) {
@@ -247,6 +312,10 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         }
     }
 
+    /**
+     * Algorithm for finding the shortest path in an unweighted graph.
+     * @param n
+     */
     public void BFS(node_data n) {
         //Reset distances.
         for (node_data x : graph.getV()) {

@@ -4,6 +4,16 @@ import api.geo_location;
 import api.node_data;
 import gameClient.util.Point3D;
 
+/**
+ * This implement node_data that represents the set of operations applicable on a
+ * node (vertex) in a (directional) weighted graph.
+ * The node in the graph consists of four things:
+ * info- Contains some characteristic of the node such as color and more .. In this project it stores the parent node.
+ * tag-Temporal data which can be used be algorithms.
+ * location- location of this node.
+ * weight- Weight of the node.
+ */
+
 public class NodeData implements node_data {
 
     /**
