@@ -40,7 +40,7 @@ Main functions:
 isConnected- checks whether the graph is linked.<br>
 shortestPathDist- Returns the length of the shortest path.<br>
 shortestPath- Returns a list of nodes in the shortest path.<br>
-
+The class methods use 2 main algorithms Dijkstra and BFS
 
 **Point3D class:**<br>
 This implementation geo_location<br>
