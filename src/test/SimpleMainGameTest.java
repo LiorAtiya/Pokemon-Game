@@ -1,15 +1,18 @@
-package gameClient;
+package test;
 
 import Classes.DWGraph_Algo;
 import Server.Game_Server_Ex2;
 import api.*;
+import gameClient.Agent;
+import gameClient.Arena;
+import gameClient.Pokemon;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
 
-public class SimpleMainGame {
+public class SimpleMainGameTest {
 
     private static Arena _ar;
     private static long dt = 0;
@@ -28,6 +31,19 @@ public class SimpleMainGame {
         runGame(8);
         runGame(9);
         runGame(10);
+        runGame(11);
+        runGame(12);
+        runGame(13);
+        runGame(14);
+        runGame(15);
+        runGame(16);
+        runGame(17);
+        runGame(18);
+        runGame(19);
+        runGame(20);
+        runGame(21);
+        runGame(22);
+        runGame(23);
         Write2File("TotalGrades.txt", info);
     }
 

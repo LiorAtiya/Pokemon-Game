@@ -14,6 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The GamePanel class is used for drawing the components on the frame of the game
+ * Contains: drawing information about the game, graph, Pokemon, agents, and refreshing
+ * the components each time.
+ */
 public class GamePanel extends JPanel {
 
     private Arena _ar;
@@ -44,6 +49,11 @@ public class GamePanel extends JPanel {
         return image;
     }
 
+    /**
+     * Drawing information about the game that contains:
+     * Time to finish the game, number of moves, game score, stage number and score of each agent.
+     * @param g
+     */
     public void drawHeader(Graphics g) {
         Font font = new Font("Copperplate Gothic Bold", Font.PLAIN, 18);
         g.setFont(font);
@@ -58,6 +68,10 @@ public class GamePanel extends JPanel {
         g.drawString("Moves: " + _ar.get_info().get("moves"), 600, 30);
     }
 
+
+    /**
+     * Refresh the drawings with each reading during the game.
+     */
     private void updateFrame() {
         Range rx = new Range(20, this.getWidth() - 20);
         Range ry = new Range(this.getHeight() - 10, 150);
@@ -66,6 +80,10 @@ public class GamePanel extends JPanel {
         _w2f = Arena.w2f(g, frame);
     }
 
+    /**
+     * Drawing the graph - which includes nodes and edges
+     * @param g
+     */
     private void drawGraph(Graphics g) {
         directed_weighted_graph gg = _ar.getGraph();
 
@@ -81,6 +99,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Drawing the Pokemon on the graph.
+     * @param g
+     */
     private void drawPokemons(Graphics g) {
         List<Pokemon> fs = _ar.getPokemons();
         for (int i = 0; i < fs.size(); i++) {
@@ -93,6 +115,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Drawing the agents on the graph.
+     * @param g
+     */
     private void drawAgants(Graphics g) {
         List<Agent> listAgents = _ar.getAgents();
 
@@ -104,12 +130,23 @@ public class GamePanel extends JPanel {
 //
     }
 
+    /**
+     * Drawing a vertex on the graph.
+     * @param n node
+     * @param r size
+     * @param g
+     */
     private void drawNode(node_data n, int r, Graphics g) {
         geo_location pos = n.getLocation();
         geo_location fp = this._w2f.world2frame(pos);
         g.drawImage(importImage("data/pictures/home.png"), (int) fp.x() - r - 10, (int) fp.y() - r - 14, 8 * r, 8 * r, this);
     }
 
+    /**
+     * Drawing a edge on the graph.
+     * @param e edge
+     * @param g
+     */
     private void drawEdge(edge_data e, Graphics g) {
         g.setColor(new Color(153, 102, 0));
         directed_weighted_graph gg = _ar.getGraph();

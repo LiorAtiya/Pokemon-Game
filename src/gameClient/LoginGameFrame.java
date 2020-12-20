@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class is used for the login window of the game (GUI)
+ * Containing within it the inputs of ID and a stage in the game and beyond the beginning of the game.
+ */
 public class LoginGameFrame extends JFrame implements ActionListener {
 
 //    private static JComboBox chooseField;
