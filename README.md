@@ -141,7 +141,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 >When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
 
 <p align="center">
-![Alt Text](https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif)
+<img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="50" height="50">
 </p>    
 
 The game can be played from:
