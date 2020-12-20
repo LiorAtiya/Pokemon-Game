@@ -73,8 +73,8 @@ windowCenter - places the login screen in the middle of the screen.<br>
 **MainGame class:**<br>
 The department where the game takes place,<br>
 Department fields: _win, _ar, scenario_num, id, dt.<br>
-The game is run using the following functions:<br><br>
-MainGame- Defines the id and stage number in the game.
+The game is run using the following functions:<br>
+MainGame- Defines the id and stage number in the game.<br>
 run- the function through which the game runs and calls are made to the functions that are part of the game.<br>
 moveAgents- A function in which the move is made to each agent and a route is assigned to the agent.<br>
 nextNode- A function that returns the node to which the agent needs to reach according to his route.<br>
