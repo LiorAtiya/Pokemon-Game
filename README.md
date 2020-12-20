@@ -1,17 +1,58 @@
+<h1>Pokemon Game</h1>
 <p align="center">
 <img src="https://sm.ign.com/t/ign_il/screenshot/default/c89b6bc7-0673-4720-b761-bab17c7d53fa-xoq7fo_119x.1280.jpg" width="900" height="400">
 </p>    
 
-**This project is about the Pokemons game**
+<h2>Description</h2>
 that built of 2 parts:<br>
->* In the first part:<br>
+>* firrst part:<br>
 >deals with the construction of directional weighted graphstarting from the creation of the nodes and edges in the graph,<br>
 >continues with the creation of the graph itself (such as connecting the nodes in the graph and more) and basic algorithms related to the graph
 >(paths in the parent link graph and more).
 >A graph is made up of four interfaces arranged according to the hierarchy from the creation of a node to the execution of an algorithm on the graph.
->* And the second part:<br> 
+>* Second part:<br> 
 >Engaged in creating the Pokemon game from building the game itself graphics, actions performed in the game, placing the agents and building a victory strategy.<br>
 
+
+The first part:
+---------------
+
+is made up of four classe<br>
+**NodeData class:**
+This implements node_data node in a graph consists of a<br>
+info, tag, location and weight.
+In this class you can perform operations on a node in a graph such as a
+constructor and get and set operations on the node fields.
+
+**DWGraph_DS class:**<br>
+This implementation directed_weighted_graph<br>
+A graph is made up of a <br>
+Vertices, Neighbors, countMC and edgeSize.<br>
+In this class there are several functions that can be done in the graph such as:<br>
+ constructor, add node, delete node and edge, make a connection between 2 nodes, get a collection of all the node and neighbors and more.<br>
+And operations that can be performed in edge: constructor and get and set operations to edge fields that are src, des, weight, info, tag.<br>
+
+**Graph_Algo class:**<br>
+This implementation dw_graph_algorithms<br>
+This class represents a number of algorithms that can be made on a graph<br>
+Such as: init- creates a pointer to the graph.<br>
+copy- creates a copy of the graph by deep copying.<br>
+isConnected- checks whether the graph is linked.<br>
+shortestPathDist- Returns the length of the shortest path.<br>
+shortestPath- Returns a list of nodes in the shortest path.<br>
+save and load- Save and load the graph.<br>
+Dijkstra - an algorithm for finding the shortest route.<br>
+BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.<br>
+
+**Point3D class:**<br>
+This implementation geo_location<br>
+that represents a geo location <x,y,z>.<br>
+In this class the number of functions that can be performed in a location.<br>
+
+**Data Structure:**<br>
+HashMap-It is used because it allows you to get data based on key in O(1).<br>
+ArrayList-Because it has the ability to create a list in the desired order.<br>
+PriorityQueue-Because it has the ability to adjust the position of the object by definition.<br>
 
 
 The second part: Pokemon game
@@ -107,44 +148,3 @@ When a situation arises where an agent in a game is stuck at the edge we will ma
 The game can be played from:
 <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="50" height="50"> 
 <img src="https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg" width="50" height="50" background="white">  
-
-
-The first part:
----------------
-
-is made up of four classe<br>
-**NodeData class:**
-This implements node_data node in a graph consists of a<br>
-info, tag, location and weight.
-In this class you can perform operations on a node in a graph such as a
-constructor and get and set operations on the node fields.
-
-**DWGraph_DS class:**<br>
-This implementation directed_weighted_graph<br>
-A graph is made up of a <br>
-Vertices, Neighbors, countMC and edgeSize.<br>
-In this class there are several functions that can be done in the graph such as:<br>
- constructor, add node, delete node and edge, make a connection between 2 nodes, get a collection of all the node and neighbors and more.<br>
-And operations that can be performed in edge: constructor and get and set operations to edge fields that are src, des, weight, info, tag.<br>
-
-**Graph_Algo class:**<br>
-This implementation dw_graph_algorithms<br>
-This class represents a number of algorithms that can be made on a graph<br>
-Such as: init- creates a pointer to the graph.<br>
-copy- creates a copy of the graph by deep copying.<br>
-isConnected- checks whether the graph is linked.<br>
-shortestPathDist- Returns the length of the shortest path.<br>
-shortestPath- Returns a list of nodes in the shortest path.<br>
-save and load- Save and load the graph.<br>
-Dijkstra - an algorithm for finding the shortest route.<br>
-BFS - an algorithm that marks the graph nodes and helped to check whether the graph is linked.<br>
-
-**Point3D class:**<br>
-This implementation geo_location<br>
-that represents a geo location <x,y,z>.<br>
-In this class the number of functions that can be performed in a location.<br>
-
-**Data Structure:**<br>
-HashMap-It is used because it allows you to get data based on key in O(1).<br>
-ArrayList-Because it has the ability to create a list in the desired order.<br>
-PriorityQueue-Because it has the ability to adjust the position of the object by definition.<br>
