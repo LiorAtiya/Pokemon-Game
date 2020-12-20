@@ -133,12 +133,12 @@ This class defines pokemon<br>
 Class fields: _edge, _value, _type, _pos, min_dist, min_ro, id.<br>
 In this class you can do various actions on Pokemon such as: get and set actions for the class variables, builder, and more.
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">  **Goal of the game:** Collect as many Pokemon as possible.<br>
-The more Pokemon you collect with the help of the agents, the higher the score, depending on the specific value of the Pokemon.
-In order to reach the maximum score, a victory strategy was built in the department: MainGame
-Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
-This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
-When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
+><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">  **Goal of the game:** Collect as many >Pokemon as possible.<br>
+>The more Pokemon you collect with the help of the agents, the higher the score, depending on the specific value of the Pokemon.
+>In order to reach the maximum score, a victory strategy was built in the department: MainGame
+>Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
+>This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
+>When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next >edge.
 
 The game can be played from:
 <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" width="50" height="50"> 
