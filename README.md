@@ -128,7 +128,9 @@ initArena-<br>
 createGUI-
 
 **Pokemon class:**<br>
-
+This class defines pokemon<br>
+Class fields: _edge, _value, _type, _pos, min_dist, min_ro, id.<br>
+In this class you can do various actions on Pokemon such as: get and set actions for the class variables, builder, and more.
 
 Goal of the game: Collect as many Pokemon as possible.<br>
 The game has 23 different stages.<br>
