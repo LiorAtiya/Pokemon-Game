@@ -3,11 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * This class represents a very simple GUI class to present a
- * game on a graph - you are welcome to use this class - yet keep in mind
- * that the code is not well written in order to force you improve the
- * code and not to take it "as is".
- *
+ * This class represents a GUI class to present game on a graph.
+ * which contains features of the game window and the creation of
+ * a panel for drawing components on the frame window.
  */
 public class GameFrame extends JFrame{
 

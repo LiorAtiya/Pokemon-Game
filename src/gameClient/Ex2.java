@@ -2,6 +2,11 @@ package gameClient;
 
 import java.awt.*;
 
+/**
+ * Running class of the game
+ * Option 1 - Run through file .jar
+ * Option 2 - Run through the CMD
+ */
 public class Ex2 {
     public static void main(String[] args){
         if(args.length == 0){

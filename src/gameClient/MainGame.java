@@ -12,6 +12,13 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * This class presents an entire course of the game.
+ * 1. Call the server for game information using Json files.
+ * 2. Use functions to advance the game automatically using the information from the server.
+ * 3. Use functions for victory strategies automatically.
+ * 4. Create a user-friendly interface using a GUI.
+ */
 public class MainGame implements Runnable {
     private static GameFrame _win;
     private static Arena _ar;
@@ -24,12 +31,15 @@ public class MainGame implements Runnable {
         this.scenario_num = level;
     }
 
+    /**
+     * Run the game
+     */
     @Override
     public void run() {
 
         //Create game
         game_service game = Game_Server_Ex2.getServer(scenario_num); // you have [0,23] games
-//        game.login(this.id);
+        game.login(this.id);
 
         //Load graph
         dw_graph_algorithms algoGraph = new DWGraph_Algo();
@@ -78,11 +88,10 @@ public class MainGame implements Runnable {
 
     /**
      * Moves each of the agents along the edge,
-     * in case the agent is on a node the next destination (next edge) is chosen (randomly).
-     *
+     * The next node is selected according to the neighbors of the same
+     * node a target of the edge on which the agent is located.
      * @param game
-     * @param gg
-     * @param
+     * @param gg graph
      */
     private static void moveAgents(game_service game, directed_weighted_graph gg) {
         long t = game.timeToEnd();
@@ -105,7 +114,7 @@ public class MainGame implements Runnable {
             double v = ag.getValue();
             double s = ag.getSpeed();
             if (dest == -1) {
-                dest = nextNode(gg, src,ag);
+                dest = nextNode(gg, src);
                 game.chooseNextEdge(ag.getID(), dest);
                 System.out.println("Agent: " + id + " | Value: " + v + " | Speed : " + s + " | Move to node: " + dest);
                 System.out.println("Time left: " + seconds + " seconds");
@@ -113,13 +122,27 @@ public class MainGame implements Runnable {
         }
     }
 
-
-    private static int nextNode(directed_weighted_graph g, int src, Agent ag) {
-        int ans = strategy2(g, src, ag);
+    /**
+     * Selecting the next node of the agent according to strategy.
+     * @param g graph
+     * @param src source
+     * @return next node
+     */
+    private static int nextNode(directed_weighted_graph g, int src) {
+        int ans = strategy2(g, src);
         return ans;
     }
 
-    public static int strategy2(directed_weighted_graph g, int src, Agent ag) {
+    /**
+     * Victory Strategy Number 2 - The agent goes through a loop on the entire Pokemon list
+     * in the game and calculates the path from the node it is to each source node of each
+     * Pokemon in the list, and at the end the agent selects the minimum path from all
+     * the paths he has calculated.
+     * @param g graph
+     * @param src source
+     * @return
+     */
+    public static int strategy2(directed_weighted_graph g, int src) {
         int ans;
         dw_graph_algorithms wga = new DWGraph_Algo();
         wga.init(g);
@@ -156,6 +179,11 @@ public class MainGame implements Runnable {
         return ans;
     }
 
+    /**
+     * Initialize the game - create the agents, store the game information in the Arena and create the GUI.
+     * @param game
+     * @param graph
+     */
     private void init(game_service game, directed_weighted_graph graph) {
 
         ArrayList<Pokemon> pokemonList = Arena.json2Pokemons(game.getPokemons());
