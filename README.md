@@ -81,10 +81,7 @@ init- Initializes the game.
 getAgent- Returns the agents that belong to the phase.
 json2Pokemons- Gets a string of Pokemon and returns a list containing them.
 updateEdge- Updates the locations of Pokemon to edges.<br>
-isOnEdge-<br>
-isOnEdge-<br>
-isOnEdge-<br>
-GraphRange-<br>
+GraphRange-Calculate the range of the graph by x, y.<br>
 and more.
 
 **Ex2 class:**<br>
@@ -97,9 +94,8 @@ This class defines the GUI of the game.<br>
 Class variables: _ ar, _w2f.<br>
 This class defines the GUI interface of the interface using the following functions:<br>
 paintComponent- Builder for the game window.<br>
-importImage-<br>
 drawHeader- Defines the text that appears in the game window.<br>
-updateFrame-<br>
+updateFrame- Refresh the drawings with each reading during the game.<br>
 drawGraph- receives the game graph and displays it.<br>
 drawPokemons- Displays the Pokemon according to the stage.<br>
 drawAgants- Displays the agents according to the stage.<br>
@@ -109,7 +105,6 @@ drawEdge- Displays the nodes in the graph.
 **LoginGameFrame class:**<br>
 This class defines the game login window using the following functions:<br>
 LoginGameFrame- A method that defines the graphical parts of the login window such as type, button text box and more.<br>
-initLoginGame-<br>
 windowCenter - places the login screen in the middle of the screen.<br>
 
 **MainGame class:**<br>
@@ -124,9 +119,7 @@ strategy2- victory strategy was built in the department: MainGame
 Which uses the shortestPath function - which returns a list of nodes of the shortest route (defined in the DWGraph_Algo class).
 This is how the shortest route to each Pokemon in the game to which the agent is sent is calculated.
 When a situation arises where an agent in a game is stuck at the edge we will make a low break and a high number of moves so that he can eat the Pokmon and advance to the next edge.
-init-<br>
-initArena-<br>
-createGUI-
+init- Initialize the game - create the agents, store the game information in the Arena and create the GUI.<br>
 
 **Pokemon class:**<br>
 This class defines pokemon<br>
