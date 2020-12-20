@@ -144,10 +144,12 @@ In this class you can do various actions on Pokemon such as: get and set actions
 
 <p align="center">
 <img src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="700" height="400">   
+</p>
 
+<p align="center">
 **In the table you can see the game results we achieved for each stage**
 
-| Level | Grade | moves | Level | Grade | moves |
+| Level | Grade | moves | Level | Grade | moves |  
 | :---: | :---: | :---: | :---: | :---: | :---: |
 |   0   |  147  |  241  |  12   |   79  |  241  |
 |   1   |  578  |  517  |  13   |  275  |  511  |
