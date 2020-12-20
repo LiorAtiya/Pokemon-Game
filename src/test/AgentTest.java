@@ -1,29 +1,30 @@
 package test;
 
+import Classes.DWGraph_DS;
+import Classes.NodeData;
+import api.directed_weighted_graph;
+import api.node_data;
+import gameClient.Agent;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AgentTest {
 
-    @Test
-    void setTarget() {
+    private static Agent createAgent(){
+        directed_weighted_graph g = new DWGraph_DS();
+        Agent ag = new Agent(g,0);
+        return ag;
     }
 
     @Test
-    void getTarget() {
+    void srcNodeTest() {
+        Agent ag = createAgent();
     }
 
-    @Test
-    void update() {
-    }
 
     @Test
-    void getSrcNode() {
-    }
-
-    @Test
-    void toJSON() {
+    void getValue() {
     }
 
     @Test
@@ -35,15 +36,7 @@ class AgentTest {
     }
 
     @Test
-    void isMoving() {
-    }
-
-    @Test
     void testToString() {
-    }
-
-    @Test
-    void toString1() {
     }
 
     @Test
@@ -52,10 +45,6 @@ class AgentTest {
 
     @Test
     void getLocation() {
-    }
-
-    @Test
-    void getValue() {
     }
 
     @Test
@@ -68,29 +57,5 @@ class AgentTest {
 
     @Test
     void setSpeed() {
-    }
-
-    @Test
-    void get_curr_fruit() {
-    }
-
-    @Test
-    void set_curr_fruit() {
-    }
-
-    @Test
-    void set_SDT() {
-    }
-
-    @Test
-    void get_curr_edge() {
-    }
-
-    @Test
-    void get_sg_dt() {
-    }
-
-    @Test
-    void set_sg_dt() {
     }
 }
