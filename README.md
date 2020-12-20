@@ -165,7 +165,6 @@ The game can be played from:
 <img src="https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg" width="50" height="50" background="white">  
  </p>   
  
-<p align="center">
  
 **Author** @Shilo Elimelech @Lior Atiya
-</p> 
+
