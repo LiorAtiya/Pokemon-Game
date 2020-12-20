@@ -147,7 +147,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 </p>
 
 
-**In the table you can see the game results we achieved for each stage**
+***In the table you can see scores according to the game strategy we built***
 
 | Level | Grade | moves | Level | Grade | moves |  
 | :---: | :---: | :---: | :---: | :---: | :---: |
