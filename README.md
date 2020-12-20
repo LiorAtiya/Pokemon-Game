@@ -56,7 +56,7 @@ ArrayList-Because it has the ability to create a list in the desired order.<br>
 PriorityQueue-Because it has the ability to adjust the position of the object by definition.<br>
 
 
-The second part: Pokemon game
+The second part: Pokemon game <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQomLc61qIjwYvlfH3NwFWGE-sI5U6NmSPSXQ&usqp=CAU" width="25" height="25">
 ---------------
 is made up of eight classe<br>
 
