@@ -31,7 +31,7 @@ public class Agent {
 		_gg = g;
 		setMoney(0);
 		this._curr_node = _gg.getNode(start_node);
-		_pos = _curr_node.getLocation();
+//		_pos = _curr_node.getLocation();
 		_id = -1;
 		setSpeed(0);
 	}
