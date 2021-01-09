@@ -93,14 +93,85 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         if (graph.getV().isEmpty()) return true;
 
         for (node_data i : graph.getV()) {
-            BFS(graph.getNode(i.getKey()));
+            BFS(this.graph, this.graph.getNode(i.getKey()));
 //            Dijkstra(this.graph, graph.getNode(i.getKey()));
 
             for (node_data x : graph.getV()) {
-                if (x.getWeight() == Double.MAX_VALUE) return false;
+                if (x.getTag() == 0) return false;
             }
         }
         return true;
+    }
+
+    public List<node_data> connectedComponent(int src){
+        List<node_data> component = new ArrayList<>();
+        List<node_data> componentReverse = new ArrayList<>();
+        List<node_data> Union = new ArrayList<>();
+
+        BFS(this.graph, this.graph.getNode(src));
+        for (node_data x : graph.getV()) {
+            if (x.getTag() == 1){
+                component.add(x);
+            }
+        }
+//        System.out.print("\nBefore reverse: ");
+//        for(int i=0 ; i < component.size() ; i++){
+//            System.out.print(component.get(i).getKey()+", ");
+//        }
+
+        BFS(this.edgeReverse(), this.graph.getNode(src));
+        for (node_data x : graph.getV()) {
+            if (x.getTag() == 1){
+                componentReverse.add(x);
+            }
+        }
+//        System.out.print("\nAfter reverse: ");
+//        for(int i=0 ; i < componentReverse.size() ; i++){
+//            System.out.print(componentReverse.get(i).getKey()+", ");
+//        }
+
+        for(int i=0 ; i < component.size() ; i++){
+            if(componentReverse.contains(component.get(i))){
+                Union.add(component.get(i));
+            }
+        }
+
+
+        return Union;
+    }
+
+    public directed_weighted_graph edgeReverse(){
+        directed_weighted_graph reverse = new DWGraph_DS();
+        for(node_data x : graph.getV()){
+            reverse.addNode(x);
+        }
+
+        for(node_data x : graph.getV()){
+            for(edge_data e : graph.getE(x.getKey())){
+                reverse.connect(e.getDest(),e.getSrc(),e.getWeight());
+            }
+        }
+        return reverse;
+    }
+
+
+    public List<List<node_data>> connected_components(){
+        HashMap<Integer,Integer> allNodes = new HashMap();
+        List<List<node_data>> allComponents = new ArrayList<>();
+        for(node_data n : this.graph.getV()){
+            allNodes.put(n.getKey(),n.getKey());
+        }
+
+        while(allNodes.size() > 0){
+            int first = allNodes.get(allNodes.keySet().toArray()[0]);
+            List<node_data> comp = this.connectedComponent(first);
+            allComponents.add(comp);
+            for(node_data n : comp){
+                allNodes.remove(n.getKey());
+            }
+        }
+
+        return allComponents;
     }
 
     /**
