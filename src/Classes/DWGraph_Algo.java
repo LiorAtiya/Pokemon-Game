@@ -76,7 +76,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     }
 
     /**
-     * Returns true if and only if (iff) there is a valid path from the EVREY node to each,
+     * Returns true if and only if (iff) there is a valid path from the EVERY node to each,
      * by checking if there is a node in the graph
      * that the method did not reach him from all the other nodes.
      *
@@ -93,15 +93,87 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         if (graph.getV().isEmpty()) return true;
 
         for (node_data i : graph.getV()) {
-            BFS(graph.getNode(i.getKey()));
+            BFS(this.graph, this.graph.getNode(i.getKey()));
 //            Dijkstra(this.graph, graph.getNode(i.getKey()));
 
             for (node_data x : graph.getV()) {
-                if (x.getWeight() == Double.MAX_VALUE) return false;
+                if (x.getTag() == 0) return false;
             }
         }
         return true;
     }
+
+    public List<node_data> connectedComponent(int src){
+        List<node_data> component = new ArrayList<>();
+        List<node_data> componentReverse = new ArrayList<>();
+        List<node_data> Union = new ArrayList<>();
+
+        BFS(this.graph, this.graph.getNode(src));
+        for (node_data x : graph.getV()) {
+            if (x.getTag() == 1){
+                component.add(x);
+            }
+        }
+//        System.out.print("\nBefore reverse: ");
+//        for(int i=0 ; i < component.size() ; i++){
+//            System.out.print(component.get(i).getKey()+", ");
+//        }
+
+        BFS(this.edgeReverse(), this.graph.getNode(src));
+        for (node_data x : graph.getV()) {
+            if (x.getTag() == 1){
+                componentReverse.add(x);
+            }
+        }
+//        System.out.print("\nAfter reverse: ");
+//        for(int i=0 ; i < componentReverse.size() ; i++){
+//            System.out.print(componentReverse.get(i).getKey()+", ");
+//        }
+
+        for(int i=0 ; i < component.size() ; i++){
+            if(componentReverse.contains(component.get(i))){
+                Union.add(component.get(i));
+            }
+        }
+
+
+        return Union;
+    }
+
+    public directed_weighted_graph edgeReverse(){
+        directed_weighted_graph reverse = new DWGraph_DS();
+        for(node_data x : graph.getV()){
+            reverse.addNode(x);
+        }
+
+        for(node_data x : graph.getV()){
+            for(edge_data e : graph.getE(x.getKey())){
+                reverse.connect(e.getDest(),e.getSrc(),e.getWeight());
+            }
+        }
+        return reverse;
+    }
+
+
+    public List<List<node_data>> connected_components(){
+        HashMap<Integer,Integer> allNodes = new HashMap();
+        List<List<node_data>> allComponents = new ArrayList<>();
+        for(node_data n : this.graph.getV()){
+            allNodes.put(n.getKey(),n.getKey());
+        }
+
+        while(allNodes.size() > 0){
+            int first = allNodes.get(allNodes.keySet().toArray()[0]);
+            List<node_data> comp = this.connectedComponent(first);
+            allComponents.add(comp);
+            for(node_data n : comp){
+                allNodes.remove(n.getKey());
+            }
+        }
+
+        return allComponents;
+    }
+
 
     /**
      * Returns the shortest path length between src and dest
@@ -111,7 +183,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * The algorithm gets the start and destination value and first goes over all the nodes in the graph using an iterator
      * and updates the tag value to Double.Max_Value.
      * Then insert the source node into the PriorityQueue structure which allows to say priority (this priority was set
-     * by the comperator in class) and thus arrange the node with the shortest route at the top of the queue.
+     * by the comparator in class) and thus arrange the node with the shortest route at the top of the queue.
      * The algorithm then passes over neighbors by using iterator of each vertex starting from src and removes
      * from the queue the neighbor with the shortest route.
      * Which ensures that we will not be able to reach every junction with a shorter route.
@@ -316,9 +388,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Algorithm for finding the shortest path in an unweighted graph.
      * @param n
      */
-    public void BFS(node_data n) {
+    public void BFS(directed_weighted_graph g,node_data n) {
         //Reset distances.
-        for (node_data x : graph.getV()) {
+        for (node_data x : g.getV()) {
             x.setTag(0);
         }
         n.setTag(1);
@@ -329,9 +401,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         while (!q.isEmpty()) {
             node_data current = q.remove();
 
-            for (edge_data v : graph.getE(current.getKey())) {
+            for (edge_data v : g.getE(current.getKey())) {
                 //If you have not yet passed the node.
-                node_data temp = graph.getNode(v.getDest());
+                node_data temp = g.getNode(v.getDest());
                 if (temp.getTag() == 0) {
                     //Marking the distance from the src
                     temp.setTag(1);
