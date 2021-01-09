@@ -76,7 +76,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     }
 
     /**
-     * Returns true if and only if (iff) there is a valid path from the EVERY node to each,
+     * Returns true if and only if (iff) there is a valid path from the EVREY node to each,
      * by checking if there is a node in the graph
      * that the method did not reach him from all the other nodes.
      *
@@ -174,7 +174,6 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         return allComponents;
     }
 
-
     /**
      * Returns the shortest path length between src and dest
      * by implementing a dijkstra algorithm.
@@ -183,7 +182,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * The algorithm gets the start and destination value and first goes over all the nodes in the graph using an iterator
      * and updates the tag value to Double.Max_Value.
      * Then insert the source node into the PriorityQueue structure which allows to say priority (this priority was set
-     * by the comparator in class) and thus arrange the node with the shortest route at the top of the queue.
+     * by the comperator in class) and thus arrange the node with the shortest route at the top of the queue.
      * The algorithm then passes over neighbors by using iterator of each vertex starting from src and removes
      * from the queue the neighbor with the shortest route.
      * Which ensures that we will not be able to reach every junction with a shorter route.
@@ -388,9 +387,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Algorithm for finding the shortest path in an unweighted graph.
      * @param n
      */
-    public void BFS(directed_weighted_graph g,node_data n) {
+    public void BFS(directed_weighted_graph graph,node_data n) {
         //Reset distances.
-        for (node_data x : g.getV()) {
+        for (node_data x : graph.getV()) {
             x.setTag(0);
         }
         n.setTag(1);
@@ -401,9 +400,9 @@ public class DWGraph_Algo implements dw_graph_algorithms {
         while (!q.isEmpty()) {
             node_data current = q.remove();
 
-            for (edge_data v : g.getE(current.getKey())) {
+            for (edge_data v : graph.getE(current.getKey())) {
                 //If you have not yet passed the node.
-                node_data temp = g.getNode(v.getDest());
+                node_data temp = graph.getNode(v.getDest());
                 if (temp.getTag() == 0) {
                     //Marking the distance from the src
                     temp.setTag(1);
