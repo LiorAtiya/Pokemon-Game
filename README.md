@@ -131,7 +131,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 <p align="center">
 The game can be played from:
 <img src="http://up419.siz.co.il/up3/zwmomgyy2ykj.png" width="50" height="50">      
-<img src="" width="50" height="50"> 
+<img src="https://user-images.githubusercontent.com/22147116/212725206-3ee6196a-2521-48c2-8a73-465e7637396e.png" width="50" height="50"> 
 
 ![IntelliJ_Icon svg](https://user-images.githubusercontent.com/22147116/212725206-3ee6196a-2521-48c2-8a73-465e7637396e.png)
 
