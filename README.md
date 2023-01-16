@@ -123,7 +123,7 @@ In this class you can do various actions on Pokemon such as: get and set actions
 
 | Login Page | Game Page |
 | ------------- | ------------- |
-| <p align="center"><img alt="Screen Shot 2023-01-06 at 11 00 23" src="https://user-images.githubusercontent.com/22147116/212735609-c3e7c69c-0080-40dd-8843-9f21a4b3faf7.png" width="400" height="400"></p>  | <p align="center"><img alt="Screen Shot 2023-01-06 at 11 00 43" src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="630" height="400"></p>  |
+| <p align="center"><img alt="Screen Shot 2023-01-06 at 11 00 23" src="https://user-images.githubusercontent.com/22147116/212735609-c3e7c69c-0080-40dd-8843-9f21a4b3faf7.png" width="400" height="400"></p>  | <p align="center"><img alt="Screen Shot 2023-01-06 at 11 00 43" src="https://media.giphy.com/media/Cfyg66IOQyNAZq3Zkv/giphy.gif" width="600" height="400"></p>  |
 
 
 
