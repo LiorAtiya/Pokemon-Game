@@ -387,7 +387,7 @@ public class DWGraph_Algo implements dw_graph_algorithms {
      * Algorithm for finding the shortest path in an unweighted graph.
      * @param n
      */
-    public void BFS(node_data n) {
+    public void BFS(directed_weighted_graph graph, node_data n) {
         //Reset distances.
         for (node_data x : graph.getV()) {
             x.setTag(0);
